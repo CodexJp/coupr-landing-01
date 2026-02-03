@@ -1,0 +1,2610 @@
+{
+  "version": "2.6",
+  "children": [
+    {
+      "type": "frame",
+      "id": "iWnrc",
+      "x": 0,
+      "y": 0,
+      "name": "Coupr Landing Page",
+      "width": 1440,
+      "fill": "$off-white",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ucxnt",
+          "name": "Nav",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "$pure-white",
+          "padding": [
+            0,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "23cYi",
+              "name": "logoContainer",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CetQ8",
+                  "name": "logoIcon",
+                  "rotation": 3.0000000000000004,
+                  "width": 48,
+                  "height": 48,
+                  "fill": "$primary",
+                  "cornerRadius": 16,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "5dU2R",
+                      "name": "cartIcon",
+                      "width": 24,
+                      "height": 24,
+                      "iconFontName": "shopping_cart_checkout",
+                      "iconFontFamily": "Material Symbols Outlined",
+                      "fill": "$pure-white"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "0qarJ",
+                  "name": "logoText",
+                  "fill": "$text-main",
+                  "content": "coupr",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 28,
+                  "fontWeight": "900"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wyNdh",
+              "name": "navLinks",
+              "gap": 48,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CjZLz",
+                  "name": "link1",
+                  "fill": "$text-muted",
+                  "content": "EXPERIENCE",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "HUkRK",
+                  "name": "link2",
+                  "fill": "$text-muted",
+                  "content": "MISSION",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "3qDkO",
+                  "name": "link3",
+                  "fill": "$text-muted",
+                  "content": "BRANDS",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "QSER3",
+                  "name": "link4",
+                  "fill": "$text-muted",
+                  "content": "STORIES",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "700",
+                  "letterSpacing": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RHtIp",
+              "name": "ctaBtn",
+              "fill": "$primary",
+              "cornerRadius": 50,
+              "padding": [
+                16,
+                40
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "clsFO",
+                  "name": "ctaText",
+                  "fill": "$pure-white",
+                  "content": "BOOK DEMO",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "900",
+                  "letterSpacing": 2
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "SmhX0",
+          "name": "Hero Section",
+          "width": "fill_container",
+          "gap": 24,
+          "padding": 32,
+          "alignItems": "end",
+          "children": [
+            {
+              "type": "frame",
+              "id": "24H0h",
+              "name": "Hero Main",
+              "width": "fill_container",
+              "height": 600,
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "layout": "vertical",
+              "gap": 48,
+              "padding": 80,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "VCs7w",
+                  "name": "badge",
+                  "fill": "$primary-10",
+                  "cornerRadius": 50,
+                  "gap": 12,
+                  "padding": [
+                    8,
+                    24
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "62Vra",
+                      "name": "badgeDot",
+                      "fill": "$primary",
+                      "width": 8,
+                      "height": 8
+                    },
+                    {
+                      "type": "text",
+                      "id": "Dezsj",
+                      "name": "badgeText",
+                      "fill": "$primary",
+                      "content": "INNOVATION IN RETAIL",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "900",
+                      "letterSpacing": 3
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GmepJ",
+                  "name": "headlineContainer",
+                  "width": 622,
+                  "height": 243,
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "tcJCh",
+                      "name": "headline1",
+                      "fill": "$text-main",
+                      "content": "Ask anything.",
+                      "lineHeight": 0.95,
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 80,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "hnAHG",
+                      "name": "headline2",
+                      "fill": "$primary",
+                      "textGrowth": "fixed-width-height",
+                      "width": 604,
+                      "height": 90,
+                      "content": "Your cart's got you.",
+                      "lineHeight": 0.95,
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 80,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "NbUHn",
+                  "name": "subheadline",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width-height",
+                  "width": 600,
+                  "height": 95,
+                  "content": "We are re-imagining the in-store supermarket shopping experience by transforming traditional carts into AI-powered shopping assistants.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 20,
+                  "fontWeight": "300"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "JPB0s",
+              "name": "Hero Sidebar",
+              "width": 578,
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EXcZe",
+                  "name": "Image Card",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "sdfrahbar",
+                    "link": "https://unsplash.com/@sdfrahbar",
+                    "author": "Sdf Rahbar"
+                  },
+                  "width": 603,
+                  "height": 456,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "../source/images/tablet-product.png",
+                    "mode": "fit"
+                  },
+                  "cornerRadius": 24,
+                  "padding": 20,
+                  "alignItems": "end"
+                },
+                {
+                  "type": "frame",
+                  "id": "TqBiV",
+                  "name": "buttonsRow",
+                  "width": "fill_container",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "SSDtK",
+                      "name": "demoBtn",
+                      "width": "fill_container",
+                      "height": 120,
+                      "fill": "$primary",
+                      "cornerRadius": 24,
+                      "layout": "vertical",
+                      "padding": 24,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "NwUJJ",
+                          "name": "demoBtnIcon",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "arrow_forward",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$pure-white"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yRBNQ",
+                          "name": "demoBtnText",
+                          "fill": "$pure-white",
+                          "content": "SCHEDULE\nA DEMO",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "900",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WCOta",
+                      "name": "ecosystemBtn",
+                      "width": "fill_container",
+                      "height": 120,
+                      "fill": "$off-white",
+                      "cornerRadius": 24,
+                      "stroke": {
+                        "thickness": 2,
+                        "fill": "$slate-subtle"
+                      },
+                      "layout": "vertical",
+                      "padding": 24,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "rC9eY",
+                          "name": "ecosystemIcon",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "explore",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$text-main"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MPcER",
+                          "name": "ecosystemText",
+                          "fill": "$text-main",
+                          "content": "VIEW\nFEATURES",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "900",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "0Q8e0",
+          "name": "Partners Section",
+          "width": "fill_container",
+          "fill": "$pure-white",
+          "cornerRadius": 24,
+          "gap": 48,
+          "padding": [
+            48,
+            32
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "cKNXz",
+              "name": "partnersLabel",
+              "fill": "$text-muted",
+              "content": "INTEGRATED WITH LEADERS",
+              "fontFamily": "Inter",
+              "fontSize": 10,
+              "fontWeight": "900",
+              "letterSpacing": 4
+            },
+            {
+              "type": "frame",
+              "id": "Jduct",
+              "name": "partnersLogos",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "MVJSX",
+                  "name": "logo1",
+                  "fill": "$text-main",
+                  "content": "RetailX",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 24,
+                  "fontWeight": "900"
+                },
+                {
+                  "type": "text",
+                  "id": "P5yYS",
+                  "name": "logo2",
+                  "fill": "$text-main",
+                  "content": "MarketOne",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 24,
+                  "fontWeight": "900"
+                },
+                {
+                  "type": "text",
+                  "id": "Wtqmv",
+                  "name": "logo3",
+                  "fill": "$text-main",
+                  "content": "FreshGrocer",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 24,
+                  "fontWeight": "900"
+                },
+                {
+                  "type": "text",
+                  "id": "15avJ",
+                  "name": "logo4",
+                  "fill": "$text-main",
+                  "content": "OmniStores",
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 24,
+                  "fontWeight": "900"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yzCmR",
+          "name": "Features Section",
+          "width": "fill_container",
+          "gap": 48,
+          "padding": [
+            80,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "F0L86",
+              "name": "featuresLeft",
+              "width": 350,
+              "layout": "vertical",
+              "gap": 32,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "htozw",
+                  "name": "featuresTitle",
+                  "fill": "$text-main",
+                  "textGrowth": "fixed-width",
+                  "width": 350,
+                  "content": "Shop smarter, not harder.",
+                  "lineHeight": 1.05,
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 56,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "aadVd",
+                  "name": "featuresDesc",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": 350,
+                  "content": "Experience a new level of convenience with intelligent assistance right at your fingertips.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 18,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 4,
+                  "id": "GA8CC",
+                  "name": "featuresAccent",
+                  "fill": "$primary",
+                  "width": 96,
+                  "height": 8
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "I3M2B",
+              "name": "featuresCards",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CpjRg",
+                  "name": "askCard",
+                  "width": "fill_container",
+                  "height": 400,
+                  "fill": "$pure-white",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$slate-subtle"
+                  },
+                  "layout": "vertical",
+                  "padding": 40,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "1GlJt",
+                      "name": "askIcon",
+                      "width": 64,
+                      "height": 64,
+                      "fill": "$primary-10",
+                      "cornerRadius": 16,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "kZ3GT",
+                          "name": "askIconInner",
+                          "width": 32,
+                          "height": 32,
+                          "iconFontName": "chat_bubble",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pNxta",
+                      "name": "askContent",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lt7WY",
+                          "name": "askTitle",
+                          "fill": "$text-main",
+                          "content": "ASK",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "letterSpacing": -1
+                        },
+                        {
+                          "type": "text",
+                          "id": "bEJrv",
+                          "name": "askDesc",
+                          "fill": "$text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Need to find a product? Want to check prices, promotions, or ingredients? Just ask. Helping you shop with confidence and ease.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yzmyA",
+                  "name": "exploreCard",
+                  "width": "fill_container",
+                  "height": 400,
+                  "fill": "$secondary",
+                  "cornerRadius": 24,
+                  "layout": "vertical",
+                  "padding": 40,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "RdfLs",
+                      "name": "exploreIcon",
+                      "width": 64,
+                      "height": 64,
+                      "fill": "#FFFFFF1A",
+                      "cornerRadius": 16,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "BU2up",
+                          "name": "exploreIconInner",
+                          "width": 32,
+                          "height": 32,
+                          "iconFontName": "explore",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$pure-white"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WqTwe",
+                      "name": "exploreContent",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XDSZz",
+                          "name": "exploreTitle",
+                          "fill": "$pure-white",
+                          "content": "EXPLORE",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "letterSpacing": -1
+                        },
+                        {
+                          "type": "text",
+                          "id": "ixDay",
+                          "name": "exploreDesc",
+                          "fill": "#FFFFFFB3",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Shop your way. Whether you're focused on speed, savings, or specific dietary needs, explore the aisles effortlessly.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "CbrN6",
+                  "name": "discoverCard",
+                  "width": "fill_container",
+                  "height": 400,
+                  "fill": "$pure-white",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$slate-subtle"
+                  },
+                  "layout": "vertical",
+                  "padding": 40,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "T6ZTI",
+                      "name": "discoverIcon",
+                      "width": 64,
+                      "height": 64,
+                      "fill": "$primary-10",
+                      "cornerRadius": 16,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "neJDx",
+                          "name": "discoverIconInner",
+                          "width": 32,
+                          "height": 32,
+                          "iconFontName": "lightbulb",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AYv90",
+                      "name": "discoverContent",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "TDXYT",
+                          "name": "discoverTitle",
+                          "fill": "$text-main",
+                          "content": "DISCOVER",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 24,
+                          "fontWeight": "900",
+                          "letterSpacing": -1
+                        },
+                        {
+                          "type": "text",
+                          "id": "yxVoC",
+                          "name": "discoverDesc",
+                          "fill": "$text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Find something new—without the guesswork. Get recommendations for an opportunity to try something that fits your tastes and needs.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DVbQa",
+          "name": "Decision Intelligence",
+          "width": "fill_container",
+          "gap": 24,
+          "padding": [
+            80,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WBVlc",
+              "name": "decisionLeft",
+              "width": "fill_container",
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "gap": 48,
+              "padding": 80,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "b1d5q",
+                  "name": "decisionLabel",
+                  "fill": "$primary",
+                  "content": "DECISION INTELLIGENCE",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "900",
+                  "letterSpacing": 5
+                },
+                {
+                  "type": "text",
+                  "id": "Jcfkm",
+                  "name": "decisionTitle",
+                  "fill": "$text-main",
+                  "textGrowth": "fixed-width",
+                  "width": 500,
+                  "content": "Make better choices in seconds.",
+                  "lineHeight": 1.05,
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 56,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "0JH5o",
+                  "name": "decisionDesc",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": 500,
+                  "content": "Compare products side by side based on what matters most—price, ratings, nutrition, or ingredients. No more second-guessing—just clear, simple insights.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 18,
+                  "fontWeight": "300"
+                },
+                {
+                  "type": "frame",
+                  "id": "Edb8G",
+                  "name": "decisionFeatures",
+                  "width": "fill_container",
+                  "gap": 48,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "3Ka2f",
+                      "name": "feature1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "0YxRn",
+                          "name": "feature1Icon",
+                          "width": 64,
+                          "height": 64,
+                          "fill": "$off-white",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$slate-subtle"
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "lDLH9",
+                              "name": "feature1IconInner",
+                              "width": 28,
+                              "height": 28,
+                              "iconFontName": "qr_code_scanner",
+                              "iconFontFamily": "Material Symbols Outlined",
+                              "fill": "$primary"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "bbtDi",
+                          "name": "feature1Title",
+                          "fill": "$text-main",
+                          "content": "Scan & Identify",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 24,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "DekgP",
+                          "name": "feature1Desc",
+                          "fill": "$text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 220,
+                          "content": "Instantly recognize products on the shelf with computer vision technology.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "2u9eR",
+                      "name": "feature2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 24,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "LndP6",
+                          "name": "feature2Icon",
+                          "width": 64,
+                          "height": 64,
+                          "fill": "$off-white",
+                          "cornerRadius": 16,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$slate-subtle"
+                          },
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "akLxh",
+                              "name": "feature2IconInner",
+                              "width": 28,
+                              "height": 28,
+                              "iconFontName": "compare_arrows",
+                              "iconFontFamily": "Material Symbols Outlined",
+                              "fill": "$primary"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "QMMfF",
+                          "name": "feature2Title",
+                          "fill": "$text-main",
+                          "content": "Side-by-Side",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 24,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "B4R58",
+                          "name": "feature2Desc",
+                          "fill": "$text-muted",
+                          "textGrowth": "fixed-width",
+                          "width": 220,
+                          "content": "See nutritional facts and prices directly next to each other on your display.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cCcsM",
+              "name": "decisionRight",
+              "width": 480,
+              "fill": "$off-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "O0ohr",
+                  "name": "comparisonCard",
+                  "width": "fill_container",
+                  "fill": "$pure-white",
+                  "cornerRadius": 24,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 40,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "1wd1p",
+                      "name": "comparisonHeader",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kjyIY",
+                          "name": "comparisonTitle",
+                          "fill": "$text-main",
+                          "content": "SIDE-BY-SIDE COMPARISON",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "900",
+                          "letterSpacing": 2
+                        },
+                        {
+                          "type": "frame",
+                          "id": "fe7i9",
+                          "name": "comparisonBadge",
+                          "fill": "$primary",
+                          "cornerRadius": 50,
+                          "padding": [
+                            4,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Sp0Yy",
+                              "name": "comparisonBadgeText",
+                              "fill": "$pure-white",
+                              "content": "REAL-TIME",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "900"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Ea4Ij",
+                      "name": "productA",
+                      "width": "fill_container",
+                      "fill": "$off-white",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$slate-subtle"
+                      },
+                      "gap": 24,
+                      "padding": 24,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "hooR7",
+                          "name": "productAImg",
+                          "width": 64,
+                          "height": 64,
+                          "fill": "$pure-white",
+                          "cornerRadius": 12,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$slate-subtle"
+                          }
+                        },
+                        {
+                          "type": "frame",
+                          "id": "nONYw",
+                          "name": "productAInfo",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uEk8C",
+                              "name": "productAName",
+                              "fill": "$text-main",
+                              "content": "Brand A",
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Fxvi2",
+                              "name": "productADetails",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "NSYYU",
+                                  "name": "productASugar",
+                                  "fill": "$text-muted",
+                                  "content": "Sugar: 12g",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "b6Khy",
+                                  "name": "productAPrice",
+                                  "fill": "$text-main",
+                                  "content": "$4.99",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 14,
+                                  "fontWeight": "900"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "MGcBN",
+                      "name": "productB",
+                      "width": "fill_container",
+                      "fill": "$primary-10",
+                      "cornerRadius": 16,
+                      "stroke": {
+                        "thickness": 2,
+                        "fill": "$primary"
+                      },
+                      "gap": 24,
+                      "padding": 24,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "2dPEA",
+                          "name": "bestChoiceBadge",
+                          "fill": "$primary",
+                          "cornerRadius": 50,
+                          "padding": [
+                            4,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "KaJOs",
+                              "name": "bestChoiceText",
+                              "fill": "$pure-white",
+                              "content": "BEST CHOICE",
+                              "fontFamily": "Inter",
+                              "fontSize": 8,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "h8vEd",
+                          "name": "productBImg",
+                          "width": 64,
+                          "height": 64,
+                          "fill": "$pure-white",
+                          "cornerRadius": 12,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "FdYLf",
+                              "name": "productBCheck",
+                              "width": 24,
+                              "height": 24,
+                              "iconFontName": "verified",
+                              "iconFontFamily": "Material Symbols Outlined",
+                              "fill": "$primary"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "jUJNd",
+                          "name": "productBInfo",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "oVObF",
+                              "name": "productBName",
+                              "fill": "$text-main",
+                              "content": "Brand B",
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
+                              "fontWeight": "700"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "T3n8X",
+                              "name": "productBDetails",
+                              "width": "fill_container",
+                              "justifyContent": "space_between",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "WaHnu",
+                                  "name": "productBSugar",
+                                  "fill": "$primary",
+                                  "content": "Sugar: 5g",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 12,
+                                  "fontWeight": "700"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "xvgh1",
+                                  "name": "productBPrice",
+                                  "fill": "$primary",
+                                  "content": "$4.49",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 14,
+                                  "fontWeight": "900"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "8z5AC",
+          "name": "Mission Section",
+          "width": "fill_container",
+          "fill": "$secondary",
+          "cornerRadius": 24,
+          "layout": "vertical",
+          "gap": 64,
+          "padding": 120,
+          "children": [
+            {
+              "type": "text",
+              "id": "soDLo",
+              "name": "missionLabel",
+              "fill": "$primary",
+              "content": "OUR MISSION",
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "900",
+              "letterSpacing": 5
+            },
+            {
+              "type": "text",
+              "id": "tymhv",
+              "name": "missionTitle",
+              "fill": "$pure-white",
+              "textGrowth": "fixed-width",
+              "width": 1100,
+              "content": "In-store shopping hasn't had its upgrade yet.",
+              "lineHeight": 0.95,
+              "fontFamily": "Space Grotesk",
+              "fontSize": 96,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "D4cFV",
+              "name": "missionContent",
+              "width": "fill_container",
+              "gap": 80,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "L0lmG",
+                  "name": "missionQuote",
+                  "fill": "#FFFFFFCC",
+                  "textGrowth": "fixed-width",
+                  "width": 500,
+                  "content": "\"Our mission is simple: empower you to shop the way you want...\"",
+                  "lineHeight": 1.3,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "300",
+                  "fontStyle": "italic"
+                },
+                {
+                  "type": "text",
+                  "id": "Byzdf",
+                  "name": "missionDesc",
+                  "fill": "#FFFFFF99",
+                  "textGrowth": "fixed-width",
+                  "width": 400,
+                  "content": "We believe shoppers deserve more. More convenience. More personalization. More control. Coupr is built to bridge that gap.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 18,
+                  "fontWeight": "300"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "lqcgN",
+          "name": "Feature Cards Grid",
+          "width": "fill_container",
+          "gap": 24,
+          "padding": [
+            80,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "DVPZE",
+              "name": "navCard",
+              "width": "fill_container",
+              "height": 280,
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "padding": 40,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "fOp0H",
+                  "name": "navIcon",
+                  "width": 48,
+                  "height": 48,
+                  "iconFontName": "map",
+                  "iconFontFamily": "Material Symbols Outlined",
+                  "fill": "$primary"
+                },
+                {
+                  "type": "frame",
+                  "id": "qXiC5",
+                  "name": "navContent",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "fYv1R",
+                      "name": "navTitle",
+                      "fill": "$text-main",
+                      "content": "Smart Navigation",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "T1MVH",
+                      "name": "navDesc",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Most efficient route based on your specific list and inventory locations.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Cn4JF",
+              "name": "recipeCard",
+              "width": "fill_container",
+              "height": 280,
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "padding": 40,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "aDCTr",
+                  "name": "recipeIcon",
+                  "width": 48,
+                  "height": 48,
+                  "iconFontName": "restaurant_menu",
+                  "iconFontFamily": "Material Symbols Outlined",
+                  "fill": "$primary"
+                },
+                {
+                  "type": "frame",
+                  "id": "8xeKJ",
+                  "name": "recipeContent",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "4MTpN",
+                      "name": "recipeTitle",
+                      "fill": "$text-main",
+                      "content": "Recipe Integration",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "d35LX",
+                      "name": "recipeDesc",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Add ingredients from digital recipes directly to your assistant cart.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RwJyx",
+              "name": "dietCard",
+              "width": "fill_container",
+              "height": 280,
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "padding": 40,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "tW15l",
+                  "name": "dietIcon",
+                  "width": 48,
+                  "height": 48,
+                  "iconFontName": "no_food",
+                  "iconFontFamily": "Material Symbols Outlined",
+                  "fill": "$primary"
+                },
+                {
+                  "type": "frame",
+                  "id": "69zp8",
+                  "name": "dietContent",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AIedj",
+                      "name": "dietTitle",
+                      "fill": "$text-main",
+                      "content": "Dietary Filters",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HyIRd",
+                      "name": "dietDesc",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Auto-highlight products that match your profile (Keto, Vegan, Gluten-free).",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AmTkK",
+              "name": "budgetCard",
+              "width": "fill_container",
+              "height": 280,
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "padding": 40,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "RDaOR",
+                  "name": "budgetIcon",
+                  "width": 48,
+                  "height": 48,
+                  "iconFontName": "savings",
+                  "iconFontFamily": "Material Symbols Outlined",
+                  "fill": "$primary"
+                },
+                {
+                  "type": "frame",
+                  "id": "iv1fZ",
+                  "name": "budgetContent",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Zyu9P",
+                      "name": "budgetTitle",
+                      "fill": "$text-main",
+                      "content": "Real-time Budgeting",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DEp8X",
+                      "name": "budgetDesc",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Track total spend live as you shop and stay within your set limits.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "I3RfC",
+          "name": "Brands Program",
+          "width": "fill_container",
+          "gap": 24,
+          "padding": [
+            80,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "M2G8n",
+              "name": "brandsLeft",
+              "width": 500,
+              "fill": "$pure-white",
+              "cornerRadius": 24,
+              "stroke": {
+                "thickness": 1,
+                "fill": "$slate-subtle"
+              },
+              "layout": "vertical",
+              "gap": 40,
+              "padding": 80,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vkEVw",
+                  "name": "brandsLabel",
+                  "fill": "$primary",
+                  "content": "FOR BRANDS & RETAILERS",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "900",
+                  "letterSpacing": 4
+                },
+                {
+                  "type": "text",
+                  "id": "awHo9",
+                  "name": "brandsTitle",
+                  "fill": "$text-main",
+                  "textGrowth": "fixed-width",
+                  "width": 340,
+                  "content": "COUPR BRANDS PROGRAM",
+                  "lineHeight": 1,
+                  "fontFamily": "Space Grotesk",
+                  "fontSize": 48,
+                  "fontWeight": "900",
+                  "letterSpacing": -2
+                },
+                {
+                  "type": "text",
+                  "id": "KjRjI",
+                  "name": "brandsDesc",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": 340,
+                  "content": "Retail Media Innovation. Show your products to the right person, at the right time, at the right place.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 18,
+                  "fontWeight": "300"
+                },
+                {
+                  "type": "frame",
+                  "id": "BROP3",
+                  "name": "brandsBtn",
+                  "width": "fill_container",
+                  "fill": "$secondary",
+                  "cornerRadius": 50,
+                  "padding": [
+                    24,
+                    48
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "reen1",
+                      "name": "brandsBtnText",
+                      "fill": "$pure-white",
+                      "content": "JOIN THE PROGRAM",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "900",
+                      "letterSpacing": 3
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TcZcE",
+              "name": "brandsRight",
+              "width": "fill_container",
+              "fill": "$off-white",
+              "cornerRadius": 24,
+              "gap": 32,
+              "padding": 80,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bJysB",
+                  "name": "metric1",
+                  "fill": "$pure-white",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "h6UB5",
+                      "name": "metric1Icon",
+                      "width": 64,
+                      "height": 64,
+                      "fill": "$primary-10",
+                      "cornerRadius": 50,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "uUDB3",
+                          "name": "metric1IconInner",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "trending_up",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "IvxSv",
+                      "name": "metric1Text",
+                      "fill": "$text-main",
+                      "content": "HIGHER\nCONVERSION",
+                      "lineHeight": 1.4,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "900",
+                      "letterSpacing": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IrTjj",
+                  "name": "metric2",
+                  "fill": "$pure-white",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ww6pm",
+                      "name": "metric2Icon",
+                      "width": 64,
+                      "height": 64,
+                      "fill": "$primary-10",
+                      "cornerRadius": 50,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "8sLgL",
+                          "name": "metric2IconInner",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "payments",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ja23u",
+                      "name": "metric2Text",
+                      "fill": "$text-main",
+                      "content": "HIGHER\nROI",
+                      "lineHeight": 1.4,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "900",
+                      "letterSpacing": 2
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cMppD",
+                  "name": "metric3",
+                  "fill": "$pure-white",
+                  "cornerRadius": 16,
+                  "layout": "vertical",
+                  "gap": 24,
+                  "padding": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "F31Kk",
+                      "name": "metric3Icon",
+                      "width": 64,
+                      "height": 64,
+                      "fill": "$primary-10",
+                      "cornerRadius": 50,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "OEWWs",
+                          "name": "metric3IconInner",
+                          "width": 28,
+                          "height": 28,
+                          "iconFontName": "visibility",
+                          "iconFontFamily": "Material Symbols Outlined",
+                          "fill": "$primary"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "A3j8i",
+                      "name": "metric3Text",
+                      "fill": "$text-main",
+                      "content": "HIGHER\nTRACEABILITY",
+                      "lineHeight": 1.4,
+                      "textAlign": "center",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "900",
+                      "letterSpacing": 2
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Ukvb7",
+          "name": "Testimonials",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 64,
+          "padding": [
+            80,
+            32
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "Jn2fc",
+              "name": "testimonialsTitle",
+              "fill": "$text-main",
+              "content": "Success Stories",
+              "textAlign": "center",
+              "fontFamily": "Space Grotesk",
+              "fontSize": 48,
+              "fontWeight": "900",
+              "letterSpacing": -2
+            },
+            {
+              "type": "frame",
+              "id": "izxhY",
+              "name": "testimonialsGrid",
+              "width": "fill_container",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XQBrl",
+                  "name": "testimonial1",
+                  "width": "fill_container",
+                  "height": 450,
+                  "fill": "$pure-white",
+                  "cornerRadius": [
+                    64,
+                    24,
+                    64,
+                    24
+                  ],
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$slate-subtle"
+                  },
+                  "layout": "vertical",
+                  "padding": 48,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eIZ7x",
+                      "name": "quote1Mark",
+                      "fill": "$primary-20",
+                      "content": "\"",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 64,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "P9kDK",
+                      "name": "quote1Text",
+                      "fill": "$text-main",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Coupr carts completely changed how I shop. I can find gluten-free items for my kids instantly, and I never go over budget anymore.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "66vRL",
+                      "name": "author1",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "j86P4",
+                          "name": "author1Img",
+                          "fill": "$slate-subtle",
+                          "width": 56,
+                          "height": 56
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lgmgi",
+                          "name": "author1Info",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "l2vpj",
+                              "name": "author1Name",
+                              "fill": "$text-main",
+                              "content": "SARAH JENKINS",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "CHBQc",
+                              "name": "author1Role",
+                              "fill": "$primary",
+                              "content": "BUSY MOM",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cIU5S",
+                  "name": "testimonial2",
+                  "width": "fill_container",
+                  "height": 450,
+                  "fill": "$secondary",
+                  "cornerRadius": [
+                    64,
+                    24,
+                    64,
+                    24
+                  ],
+                  "layout": "vertical",
+                  "padding": 48,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CvEyz",
+                      "name": "quote2Mark",
+                      "fill": "#FFFFFF1A",
+                      "content": "\"",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 64,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eHe0V",
+                      "name": "quote2Text",
+                      "fill": "$pure-white",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "The recipe integration is a game changer. I just load my meal plan and the cart guides me to everything I need. It's brilliant.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "8IkS1",
+                      "name": "author2",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "TPjYt",
+                          "name": "author2Img",
+                          "fill": "#FFFFFF33",
+                          "width": 56,
+                          "height": 56
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uicIM",
+                          "name": "author2Info",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "VoxL1",
+                              "name": "author2Name",
+                              "fill": "$pure-white",
+                              "content": "MARK DAVIS",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "xjpTY",
+                              "name": "author2Role",
+                              "fill": "$primary",
+                              "content": "CHEF",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FjjzW",
+                  "name": "testimonial3",
+                  "width": "fill_container",
+                  "height": 450,
+                  "fill": "$pure-white",
+                  "cornerRadius": [
+                    64,
+                    24,
+                    64,
+                    24
+                  ],
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$slate-subtle"
+                  },
+                  "layout": "vertical",
+                  "padding": 48,
+                  "justifyContent": "space_between",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Jg3Dv",
+                      "name": "quote3Mark",
+                      "fill": "$primary-20",
+                      "content": "\"",
+                      "fontFamily": "Space Grotesk",
+                      "fontSize": 64,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HsKYW",
+                      "name": "quote3Text",
+                      "fill": "$text-main",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Being able to compare nutritional facts side-by-side right at the shelf helps me make much better choices without spending hours.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "500",
+                      "fontStyle": "italic"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ivKFg",
+                      "name": "author3",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "BWaeh",
+                          "name": "author3Img",
+                          "fill": "$slate-subtle",
+                          "width": 56,
+                          "height": 56
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uWIME",
+                          "name": "author3Info",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Vtaez",
+                              "name": "author3Name",
+                              "fill": "$text-main",
+                              "content": "EMILY ROGERS",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "VxCm5",
+                              "name": "author3Role",
+                              "fill": "$primary",
+                              "content": "HEALTH ADVOCATE",
+                              "fontFamily": "Inter",
+                              "fontSize": 9,
+                              "fontWeight": "900",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VPyCB",
+          "name": "Final CTA",
+          "width": "fill_container",
+          "fill": "$primary",
+          "cornerRadius": 48,
+          "layout": "vertical",
+          "gap": 48,
+          "padding": 120,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "5stJv",
+              "name": "ctaTitle",
+              "fill": "$pure-white",
+              "textGrowth": "fixed-width",
+              "width": 900,
+              "content": "Ready to upgrade your store?",
+              "lineHeight": 1,
+              "textAlign": "center",
+              "fontFamily": "Space Grotesk",
+              "fontSize": 80,
+              "fontWeight": "900",
+              "letterSpacing": -3
+            },
+            {
+              "type": "text",
+              "id": "evLWq",
+              "name": "ctaDesc",
+              "fill": "#FFFFFFCC",
+              "textGrowth": "fixed-width",
+              "width": 700,
+              "content": "Join forward-thinking retailers using Coupr to delight customers and increase basket size with intelligent infrastructure.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "300"
+            },
+            {
+              "type": "frame",
+              "id": "fAjCZ",
+              "name": "ctaButton",
+              "fill": "$pure-white",
+              "cornerRadius": 50,
+              "padding": [
+                32,
+                80
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "MwtvT",
+                  "name": "ctaButtonText",
+                  "fill": "$primary",
+                  "content": "SCHEDULE CALL",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "900",
+                  "letterSpacing": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dXNjw",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "$pure-white",
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "$slate-subtle"
+          },
+          "layout": "vertical",
+          "gap": 80,
+          "padding": [
+            96,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "CbREf",
+              "name": "footerMain",
+              "width": "fill_container",
+              "gap": 64,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PCm93",
+                  "name": "footerBrand",
+                  "width": 500,
+                  "layout": "vertical",
+                  "gap": 40,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "zVWFK",
+                      "name": "footerLogoRow",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "6lDj9",
+                          "name": "footerLogoIcon",
+                          "rotation": 3.0000000000000004,
+                          "width": 48,
+                          "height": 48,
+                          "fill": "$primary",
+                          "cornerRadius": 16,
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "paeIj",
+                              "name": "footerLogoIconInner",
+                              "width": 24,
+                              "height": 24,
+                              "iconFontName": "shopping_cart_checkout",
+                              "iconFontFamily": "Material Symbols Outlined",
+                              "fill": "$pure-white"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "qf009",
+                          "name": "footerLogoText",
+                          "fill": "$text-main",
+                          "content": "COUPR",
+                          "fontFamily": "Space Grotesk",
+                          "fontSize": 32,
+                          "fontWeight": "900"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "GBpRJ",
+                      "name": "footerTagline",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 400,
+                      "content": "Our mission is simple: empower you to shop the way you want with intelligent tools that make every trip better.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "300"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aVOM2",
+                      "name": "footerStatus",
+                      "gap": 12,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "o3H39",
+                          "name": "footerStatusDot",
+                          "fill": "#22C55E",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "text",
+                          "id": "9YhHG",
+                          "name": "footerStatusText",
+                          "fill": "$text-muted",
+                          "content": "SYSTEM OPERATIONAL",
+                          "fontFamily": "Inter",
+                          "fontSize": 9,
+                          "fontWeight": "900",
+                          "letterSpacing": 4
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1AmAD",
+                  "name": "footerLinks",
+                  "width": "fill_container",
+                  "gap": 48,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "wAwK3",
+                      "name": "footerCol1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hZpJb",
+                          "name": "footerCol1Title",
+                          "fill": "$text-main",
+                          "content": "PRODUCT",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "900",
+                          "letterSpacing": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "9X18y",
+                          "name": "footerCol1Links",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 24,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Rf4Vn",
+                              "name": "footerCol1Link1",
+                              "fill": "$text-muted",
+                              "content": "FEATURES",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "gB06C",
+                              "name": "footerCol1Link2",
+                              "fill": "$text-muted",
+                              "content": "TECHNOLOGY",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "jCem6",
+                              "name": "footerCol1Link3",
+                              "fill": "$text-muted",
+                              "content": "BRANDS PROGRAM",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "b38gf",
+                      "name": "footerCol2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "KVkdw",
+                          "name": "footerCol2Title",
+                          "fill": "$text-main",
+                          "content": "RESOURCES",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "900",
+                          "letterSpacing": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "VnU1C",
+                          "name": "footerCol2Links",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 24,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "d7WRL",
+                              "name": "footerCol2Link1",
+                              "fill": "$text-muted",
+                              "content": "HELP CENTER",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "lFgrY",
+                              "name": "footerCol2Link2",
+                              "fill": "$text-muted",
+                              "content": "CASE STUDIES",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "WOoq9",
+                              "name": "footerCol2Link3",
+                              "fill": "$text-muted",
+                              "content": "PRIVACY",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wJJJd",
+                      "name": "footerCol3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 24,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ii4Cu",
+                          "name": "footerCol3Title",
+                          "fill": "$text-main",
+                          "content": "COMPANY",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "900",
+                          "letterSpacing": 4
+                        },
+                        {
+                          "type": "frame",
+                          "id": "WUk3z",
+                          "name": "footerCol3Links",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 24,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "u2SET",
+                              "name": "footerCol3Link1",
+                              "fill": "$text-muted",
+                              "content": "ABOUT US",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "tQvTW",
+                              "name": "footerCol3Link2",
+                              "fill": "$text-muted",
+                              "content": "CAREERS",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            },
+                            {
+                              "type": "text",
+                              "id": "O1tSl",
+                              "name": "footerCol3Link3",
+                              "fill": "$text-muted",
+                              "content": "CONTACT",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "700",
+                              "letterSpacing": 2
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "waFUX",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "f3g0U",
+                  "name": "footerCopyright",
+                  "fill": "$text-muted",
+                  "content": "© 2025 COUPR INC. — ENGINEERED FOR EXCELLENCE",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "900",
+                  "letterSpacing": 3
+                },
+                {
+                  "type": "frame",
+                  "id": "0ojGG",
+                  "name": "footerConnectBtn",
+                  "fill": "$off-white",
+                  "cornerRadius": 50,
+                  "stroke": {
+                    "thickness": 2,
+                    "fill": "$slate-subtle"
+                  },
+                  "padding": [
+                    16,
+                    40
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "4l4iv",
+                      "name": "footerConnectText",
+                      "fill": "$text-main",
+                      "content": "CONNECT NOW",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "900",
+                      "letterSpacing": 3
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "rectangle",
+      "id": "V7gO2",
+      "x": -1498,
+      "y": 318,
+      "name": "Rectangle",
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "tablet-product.png",
+        "mode": "fill"
+      },
+      "width": 1313,
+      "height": 614
+    }
+  ],
+  "variables": {
+    "off-white": {
+      "type": "color",
+      "value": "#F8F8F8"
+    },
+    "primary": {
+      "type": "color",
+      "value": "#E1701A"
+    },
+    "primary-10": {
+      "type": "color",
+      "value": "#E1701A1A"
+    },
+    "primary-20": {
+      "type": "color",
+      "value": "#E1701A33"
+    },
+    "pure-white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "secondary": {
+      "type": "color",
+      "value": "#1A4E5E"
+    },
+    "slate-subtle": {
+      "type": "color",
+      "value": "#E5E7EB"
+    },
+    "text-main": {
+      "type": "color",
+      "value": "#1F2937"
+    },
+    "text-muted": {
+      "type": "color",
+      "value": "#6B7280"
+    }
+  }
+}
