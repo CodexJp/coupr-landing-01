@@ -190,6 +190,16 @@
             transform: translateY(30px) scale(0.97);
         }
 
+        /* MockupFrame appear animation */
+        .hero-mockup-frame {
+            animation: mockupAppear 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+        }
+
+        @keyframes mockupAppear {
+            from { opacity: 0; transform: translateY(40px) scale(0.96); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         /* Modal Styles */
         .modal-overlay {
             position: fixed;
@@ -265,7 +275,7 @@
         .marquee-content {
             display: flex;
             align-items: center;
-            animation: marquee 35s linear infinite;
+            animation: marquee 55s linear infinite;
             width: max-content;
         }
 
@@ -282,7 +292,7 @@
             display: flex;
             align-items: center;
             gap: 3rem;
-            padding: 0 1.5rem;
+            padding: 0 18rem;
         }
 
         .marquee-item span {
@@ -302,6 +312,39 @@
             background: currentColor;
             opacity: 0.2;
             flex-shrink: 0;
+        }
+
+        /* Testimonials Swiper Carousel */
+        .swiper-testimonials {
+            padding: 0 0 3rem 0;
+        }
+
+        .swiper-testimonials .swiper-slide {
+            height: auto;
+        }
+
+        .swiper-testimonials .swiper-wrapper {
+            align-items: stretch;
+        }
+
+        .swiper-pagination-testimonials {
+            position: relative;
+            margin-top: 2rem;
+        }
+
+        .swiper-pagination-testimonials .swiper-pagination-bullet {
+            width: 40px;
+            height: 4px;
+            border-radius: 2px;
+            background: #E5E7EB;
+            opacity: 1;
+            transition: all 0.3s ease;
+            margin: 0 4px;
+        }
+
+        .swiper-pagination-testimonials .swiper-pagination-bullet-active {
+            background: #E1701A;
+            width: 60px;
         }
 
         /* Feature card images with rounded corners - Premium Version */
@@ -363,23 +406,20 @@
         </div>
     </nav>
     <main class="max-w-[1600px] mx-auto px-8 pt-32 pb-20">
-        <header class="modular-grid mb-24 items-stretch">
-            <div
-                class="col-span-12 lg:col-span-7 bg-pure-white p-12 lg:p-16 rounded-custom relative overflow-hidden flex flex-col justify-center border border-slate-subtle/30 animate-on-scroll animate-from-left">
-                <div
-                    class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl">
-                </div>
-                <div class="relative z-10">
+        <header class="mb-24">
+            <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+                <!-- Left: Text Content -->
+                <div class="lg:w-1/2 animate-on-scroll">
                     <div class="inline-flex items-center gap-3 px-6 py-2 bg-primary/10 rounded-full mb-8">
                         <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
                         <span class="text-[10px] font-black tracking-[0.3em] text-primary uppercase">Innovation in
                             Retail</span>
                     </div>
-                    <h1 class="text-5xl lg:text-7xl xl:text-8xl font-bold text-text-main mb-8 leading-[0.95]">
-                        Ask anything. <br />Your cart's <br /><span
-                            class="text-primary italic underline decoration-4 underline-offset-8">got you.</span>
+                    <h1 class="text-4xl lg:text-6xl xl:text-7xl font-bold text-text-main mb-8 leading-[0.95]">
+                        Ask anything. <br />Your cart's
+                        <span class="text-primary italic">got you.</span>
                     </h1>
-                    <p class="text-lg lg:text-xl text-text-muted leading-relaxed font-light max-w-xl mb-10">
+                    <p class="text-lg lg:text-xl text-text-muted leading-relaxed font-light max-w-lg mb-10">
                         We are re-imagining the in-store supermarket shopping experience by transforming traditional
                         carts into AI-powered shopping assistants.
                     </p>
@@ -404,70 +444,50 @@
                         </p>
                     </div>
                 </div>
-            </div>
-            <div class="col-span-12 lg:col-span-5 flex items-center justify-center rounded-custom overflow-hidden bg-gradient-to-br from-off-white to-slate-subtle/30 p-4 animate-on-scroll animate-from-right animate-delay-2">
-                <img alt="Coupr AI Dashboard Interface"
-                    class="w-full h-auto object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-700"
-                    src="https://www.coupr.io/assets/svg/illustrations/tablet.svg" />
+                <!-- Right: Stacked Video Mockups -->
+                <div class="lg:w-1/2 relative animate-on-scroll animate-delay-2">
+                    <div class="relative mx-auto">
+                        <!-- Back decorative card -->
+                        <div class="absolute -top-6 -left-6 w-full h-full bg-gradient-to-br from-primary/20 to-primary/40 rounded-2xl transform rotate-6 -z-20"></div>
+                        <div class="absolute -top-3 -left-3 w-full h-full bg-gradient-to-br from-secondary/30 to-secondary/50 rounded-2xl transform rotate-3 -z-10"></div>
+                        <!-- Main video card -->
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl border border-black/[0.05] hover:rotate-0 transition-transform duration-500" style="transform: rotate(-2deg);">
+                            <video autoplay loop muted playsinline
+                                class="w-full h-auto object-contain"
+                                src="assets/ceo-feedback/0210(1).mp4">
+                            </video>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
         <section class="mb-24 bg-pure-white py-10 rounded-custom border border-slate-subtle/30 overflow-hidden">
             <div class="flex items-center justify-center gap-4 px-8 mb-8">
                 <div class="h-px bg-slate-subtle/50 w-16"></div>
-                <span class="text-[10px] font-black tracking-[0.4em] text-text-muted uppercase whitespace-nowrap">Trusted by Leading Retailers</span>
+                <span class="text-[10px] font-black tracking-[0.4em] text-text-muted uppercase whitespace-nowrap">Live pilot program</span>
                 <div class="h-px bg-slate-subtle/50 w-16"></div>
             </div>
             <div class="marquee-container">
                 <div class="marquee-content text-text-main">
-                    <!-- First set -->
+                    <!-- First set (3 logos) -->
                     <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">RetailX</span>
-                        <div class="marquee-dot"></div>
+                        <img src="assets/ceo-feedback/milams-logo.png" alt="Milam's Markets" class="h-12 object-contain cursor-default" style="opacity: 0.5;" />
                     </div>
                     <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">MarketOne</span>
-                        <div class="marquee-dot"></div>
+                        <img src="assets/ceo-feedback/milams-logo.png" alt="Milam's Markets" class="h-12 object-contain cursor-default" style="opacity: 0.5;" />
                     </div>
                     <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">FreshGrocer</span>
-                        <div class="marquee-dot"></div>
-                    </div>
-                    <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">OmniStores</span>
-                        <div class="marquee-dot"></div>
-                    </div>
-                    <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">SmartMart</span>
-                        <div class="marquee-dot"></div>
-                    </div>
-                    <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">GrocerPro</span>
-                        <div class="marquee-dot"></div>
+                        <img src="assets/ceo-feedback/milams-logo.png" alt="Milam's Markets" class="h-12 object-contain cursor-default" style="opacity: 0.5;" />
                     </div>
                     <!-- Duplicate set for seamless loop -->
                     <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">RetailX</span>
-                        <div class="marquee-dot"></div>
+                        <img src="assets/ceo-feedback/milams-logo.png" alt="Milam's Markets" class="h-12 object-contain cursor-default" style="opacity: 0.5;" />
                     </div>
                     <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">MarketOne</span>
-                        <div class="marquee-dot"></div>
+                        <img src="assets/ceo-feedback/milams-logo.png" alt="Milam's Markets" class="h-12 object-contain cursor-default" style="opacity: 0.5;" />
                     </div>
                     <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">FreshGrocer</span>
-                        <div class="marquee-dot"></div>
-                    </div>
-                    <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">OmniStores</span>
-                        <div class="marquee-dot"></div>
-                    </div>
-                    <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">SmartMart</span>
-                        <div class="marquee-dot"></div>
-                    </div>
-                    <div class="marquee-item">
-                        <span class="font-display font-black text-2xl cursor-default">GrocerPro</span>
-                        <div class="marquee-dot"></div>
+                        <img src="assets/ceo-feedback/milams-logo.png" alt="Milam's Markets" class="h-12 object-contain cursor-default" style="opacity: 0.5;" />
                     </div>
                 </div>
             </div>
@@ -540,7 +560,7 @@
                         <div>
                             <h4 class="font-bold text-2xl mb-2">Scan &amp; Identify</h4>
                             <p class="text-text-muted text-sm leading-relaxed">Instantly recognize products on the shelf
-                                with computer vision technology.</p>
+                                using our scanning technology. Full product nutrition breakdown, ready to be compared.</p>
                         </div>
                     </div>
                     <div class="flex flex-col gap-6">
@@ -606,15 +626,15 @@
                         <span class="material-symbols-outlined text-white text-3xl">map</span>
                     </div>
                     <h3 class="text-lg font-black mb-3 uppercase tracking-tight">Smart Navigation</h3>
-                    <p class="text-text-muted text-sm leading-relaxed">Most efficient route based on your specific list and inventory locations.</p>
+                    <p class="text-text-muted text-sm leading-relaxed">No more wandering the aisles. Ask Coupr for any product and we'll take you directly to it.</p>
                 </div>
                 <div
                     class="col-span-12 md:col-span-6 lg:col-span-3 bg-pure-white p-8 rounded-custom border border-slate-subtle/30 flex flex-col items-center text-center group hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 animate-on-scroll animate-delay-2">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6 shadow-lg shadow-primary/25 group-hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-white text-3xl">restaurant_menu</span>
+                        <span class="material-symbols-outlined text-white text-3xl">checklist</span>
                     </div>
-                    <h3 class="text-lg font-black mb-3 uppercase tracking-tight">Recipe Integration</h3>
-                    <p class="text-text-muted text-sm leading-relaxed">Add ingredients from digital recipes directly to your assistant cart.</p>
+                    <h3 class="text-lg font-black mb-3 uppercase tracking-tight">Add Shopping List</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">Seamlessly add your shopping list directly to your Coupr Screen.</p>
                 </div>
                 <div
                     class="col-span-12 md:col-span-6 lg:col-span-3 bg-pure-white p-8 rounded-custom border border-slate-subtle/30 flex flex-col items-center text-center group hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 animate-on-scroll animate-delay-3">
@@ -627,10 +647,10 @@
                 <div
                     class="col-span-12 md:col-span-6 lg:col-span-3 bg-pure-white p-8 rounded-custom border border-slate-subtle/30 flex flex-col items-center text-center group hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 animate-on-scroll animate-delay-4">
                     <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center mb-6 shadow-lg shadow-primary/25 group-hover:scale-110 transition-transform duration-500">
-                        <span class="material-symbols-outlined text-white text-3xl">savings</span>
+                        <span class="material-symbols-outlined text-white text-3xl">local_offer</span>
                     </div>
-                    <h3 class="text-lg font-black mb-3 uppercase tracking-tight">Real-time Budgeting</h3>
-                    <p class="text-text-muted text-sm leading-relaxed">Track total spend live as you shop and stay within your set limits.</p>
+                    <h3 class="text-lg font-black mb-3 uppercase tracking-tight">Deals & Discounts</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">All store deals at your fingertips. Personalized and sorted, just for you.</p>
                 </div>
             </div>
         </section>
@@ -671,10 +691,12 @@
             <div class="max-w-4xl mx-auto text-center animate-on-scroll animate-scale">
                 <span class="text-primary font-black tracking-[0.4em] uppercase text-[10px] block mb-6">For Brands &amp;
                     Retailers</span>
-                <h2 class="text-5xl lg:text-6xl font-black text-text-main mb-6 leading-none tracking-tighter">COUPR BRANDS PROGRAM</h2>
-                <p class="text-lg lg:text-xl text-text-muted font-light leading-relaxed mb-12 max-w-2xl mx-auto">
-                    Retail Media Innovation. Show your products to the right person, at the right time, at the right place.
-                </p>
+                <h2 class="text-5xl lg:text-6xl font-black text-text-main mb-6 leading-none tracking-tighter">COUPR RETAIL MEDIA</h2>
+                <div class="text-lg lg:text-xl text-text-muted font-light leading-relaxed mb-12 max-w-4xl mx-auto space-y-2">
+                    <p>90% of sales happen in-store, yet 90% of your campaign budget goes online.</p>
+                    <p>Let's put your money where it counts most.</p>
+                    <p>Show your products to the right person, at the right time, at the right place.</p>
+                </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                     <div class="bg-off-white p-6 rounded-2xl flex flex-col items-center text-center group hover:bg-primary/5 transition-colors">
                         <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary/20 transition-colors">
@@ -692,12 +714,12 @@
                         <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary/20 transition-colors">
                             <span class="material-symbols-outlined text-3xl">visibility</span>
                         </div>
-                        <span class="font-black tracking-widest uppercase text-xs">Higher<br />Traceability</span>
+                        <span class="font-black tracking-widest uppercase text-xs">Full-funnel<br />reporting</span>
                     </div>
                 </div>
                 <button onclick="openModal()"
                     class="bg-secondary text-white font-black py-4 px-12 rounded-full text-xs hover:bg-primary transition-all uppercase tracking-[0.3em] cursor-pointer">
-                    Join the Program
+                    Claim your aisle today
                 </button>
             </div>
         </section>
@@ -707,13 +729,16 @@
             <div class="swiper swiper-carousel animate-on-scroll">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="https://coupr.io/assets/svg/components/carrusel_left.svg" alt="Coupr Interface - Shopping View" />
+                        <img src="assets/ceo-feedback/Map Landing.jpg" alt="Coupr Interface - Store Map Navigation" />
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://coupr.io/assets/svg/components/carrusel_middle.svg" alt="Coupr Interface - Product Comparison" />
+                        <img src="assets/ceo-feedback/Shop Page Landing.jpg" alt="Coupr Interface - Shopping View" />
                     </div>
                     <div class="swiper-slide">
-                        <img src="https://coupr.io/assets/svg/components/carrusel_right.svg" alt="Coupr Interface - Recommendations" />
+                        <img src="assets/ceo-feedback/Deals Page Landing.jpg" alt="Coupr Interface - Deals & Discounts" />
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="assets/ceo-feedback/Product Page Landing.jpg" alt="Coupr Interface - Product Details" />
                     </div>
                 </div>
                 <!-- Navigation buttons -->
@@ -726,55 +751,72 @@
 
         <section class="mb-24" id="testimonials">
             <h2 class="text-5xl font-black text-center mb-16 tracking-tighter animate-on-scroll">Success Stories</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-                <div
-                    class="bg-pure-white p-10 rounded-custom border border-slate-subtle/30 relative animate-on-scroll animate-delay-1">
-                    <div class="text-5xl text-primary/20 font-display absolute top-6 right-8 leading-none">"</div>
-                    <p class="text-base text-text-main font-medium italic relative z-10 leading-relaxed mb-6">
-                        "Coupr carts completely changed how I shop. I can find gluten-free items for my kids instantly,
-                        and I never go over budget anymore."
-                    </p>
-                    <div class="flex items-center gap-4 pt-6 border-t border-slate-subtle/30">
-                        <img alt="Sarah J" class="w-12 h-12 rounded-full object-cover grayscale"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfs4Stuk45DDdimUK3oRtD6PykmKiEgvFxA7gS6jC4zG82tIrGPobFL6C4REo5_cECry_iMi2HS8xBg1_TLh63JvQ08oD4AF4iL1jtzboOnbfym-VKKAumD_QjjmXanaDlLs9EI1q8Da9aOOWjnSu-ML3zHvfjjCoHtUZU5WQBibtgki2JQepMhB8OKI35P_M3YZGhpv2H34ASZ8l1-Kw4dLojDuFcutZ_W3FrIWBqQ8V2bgPjt4C-6Mig5KxPODt2Y4jyI1rThvnT" />
-                        <div>
-                            <div class="font-black text-xs uppercase tracking-widest">Sarah Jenkins</div>
-                            <div class="text-[9px] text-primary font-black uppercase tracking-widest">Busy Mom</div>
+            <div class="swiper swiper-testimonials animate-on-scroll">
+                <div class="swiper-wrapper">
+                    <!-- Testimonial 1 - White -->
+                    <div class="swiper-slide">
+                        <div class="bg-pure-white p-10 rounded-custom border border-slate-subtle/30 relative h-full">
+                            <div class="text-5xl text-primary/20 font-display absolute top-6 right-8 leading-none">"</div>
+                            <p class="text-base text-text-main font-medium italic relative z-10 leading-relaxed mb-6">
+                                "Coupr carts completely changed how I shop. I can find gluten-free items for my kids instantly,
+                                and I never go over budget anymore."
+                            </p>
+                            <div class="flex items-center gap-4 pt-6 border-t border-slate-subtle/30">
+                                <div>
+                                    <div class="font-black text-xs uppercase tracking-widest">Sarah J.</div>
+                                    <div class="text-[9px] text-primary font-black uppercase tracking-widest">Busy Mom</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 2 - Blue -->
+                    <div class="swiper-slide">
+                        <div class="bg-secondary p-10 rounded-custom text-white relative h-full">
+                            <div class="text-5xl text-white/10 font-display absolute top-6 right-8 leading-none">"</div>
+                            <p class="text-base font-medium italic relative z-10 leading-relaxed mb-6">
+                                "I used to wander the store forever trying to track down the random things my wife texted me. Now I just load the list and the cart walks me aisle by aisle. I'm in and out in half the time - and I actually bring home everything she asked for."
+                            </p>
+                            <div class="flex items-center gap-4 pt-6 border-t border-white/10">
+                                <div>
+                                    <div class="font-black text-xs uppercase tracking-widest">Diego M.</div>
+                                    <div class="text-[9px] text-primary font-black uppercase tracking-widest">Dad of 2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 3 - White -->
+                    <div class="swiper-slide">
+                        <div class="bg-pure-white p-10 rounded-custom border border-slate-subtle/30 relative h-full">
+                            <div class="text-5xl text-primary/20 font-display absolute top-6 right-8 leading-none">"</div>
+                            <p class="text-base text-text-main font-medium italic relative z-10 leading-relaxed mb-6">
+                                "Being able to compare nutritional facts side-by-side right at the shelf helps me make much
+                                better choices without spending hours."
+                            </p>
+                            <div class="flex items-center gap-4 pt-6 border-t border-slate-subtle/30">
+                                <div>
+                                    <div class="font-black text-xs uppercase tracking-widest">Alma P.</div>
+                                    <div class="text-[9px] text-primary font-black uppercase tracking-widest">Health Adv.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Testimonial 4 - Blue -->
+                    <div class="swiper-slide">
+                        <div class="bg-secondary p-10 rounded-custom text-white relative h-full">
+                            <div class="text-5xl text-white/10 font-display absolute top-6 right-8 leading-none">"</div>
+                            <p class="text-base font-medium italic relative z-10 leading-relaxed mb-6">
+                                "I didn't realize how many promotions I was missing until I started using Coupr. Seeing the best deals pop up as I shop makes it easy to switch brands and save without thinking about it. My grocery bill is noticeably lower."
+                            </p>
+                            <div class="flex items-center gap-4 pt-6 border-t border-white/10">
+                                <div>
+                                    <div class="font-black text-xs uppercase tracking-widest">Linda M.</div>
+                                    <div class="text-[9px] text-primary font-black uppercase tracking-widest">Weekly Shopper</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div
-                    class="bg-secondary p-10 rounded-custom text-white relative animate-on-scroll animate-delay-2">
-                    <div class="text-5xl text-white/10 font-display absolute top-6 right-8 leading-none">"</div>
-                    <p class="text-base font-medium italic relative z-10 leading-relaxed mb-6">
-                        "The recipe integration is a game changer. I just load my meal plan and the cart guides me to
-                        everything I need. It's brilliant."
-                    </p>
-                    <div class="flex items-center gap-4 pt-6 border-t border-white/10">
-                        <img alt="Mark D" class="w-12 h-12 rounded-full object-cover grayscale invert"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBIUhygYH2h1FRpWM1-iUasTyoAtXYseRc1K7miCo_TQTYD9HyWtRA2JFj6dcd_IT8OzDscGUT40V_vU9t8Bbsr80IEiassOFbHwVl6KEeq1n9HZ6rmqEzw83nHQPqjQQAOHpQOVI-_UrSCjA4x3pD9nJs6bx_-UMjFX7BJ67MI8c1OoK6i-nfsuQGIxds2G7NJN0q5VnQpWrS615gAJLmBr902wv63N4LB_J4iygSINziyx-fgk94I8PtCLjb8ZRTDObQ7OBpeCA-" />
-                        <div>
-                            <div class="font-black text-xs uppercase tracking-widest">Mark Davis</div>
-                            <div class="text-[9px] text-primary font-black uppercase tracking-widest">Chef</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="bg-pure-white p-10 rounded-custom border border-slate-subtle/30 relative animate-on-scroll animate-delay-3">
-                    <div class="text-5xl text-primary/20 font-display absolute top-6 right-8 leading-none">"</div>
-                    <p class="text-base text-text-main font-medium italic relative z-10 leading-relaxed mb-6">
-                        "Being able to compare nutritional facts side-by-side right at the shelf helps me make much
-                        better choices without spending hours."
-                    </p>
-                    <div class="flex items-center gap-4 pt-6 border-t border-slate-subtle/30">
-                        <img alt="Emily R" class="w-12 h-12 rounded-full object-cover grayscale"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCelLrk8E8Qj1U1xHc66TGXJwbu-95DEpTvClVHuGKrKd_AqpsJC1XCIqtESMs7ZrQ4TbjDwkJJVnIVfrcyv-aqng_MwozVSOAmaQ7ckQh0ZEmeXCAECiNYmN1BfhVlJAsNd7YOF_UE140dqcH2Vr_JiTHE6vrhUJRjmClZfOKq3nGMoWs_CCC4xNGDLnVBKBJZ9D4dkEUQeMOTipGgo_2bkR8B5Le7Z1Ed4ull7Fztw9hHacxVDCvcdY212ftpccinmYlqcxqh0m9D" />
-                        <div>
-                            <div class="font-black text-xs uppercase tracking-widest">Emily Rogers</div>
-                            <div class="text-[9px] text-primary font-black uppercase tracking-widest">Health Adv.</div>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-pagination swiper-pagination-testimonials"></div>
             </div>
         </section>
         <section class="bg-primary rounded-[3rem] p-12 lg:p-32 text-center text-white relative overflow-hidden mb-24">
@@ -856,7 +898,17 @@
             <div
                 class="pt-12 border-t border-slate-subtle/30 flex flex-col md:flex-row justify-between items-center gap-8">
                 <div class="text-[10px] text-text-muted font-black tracking-[0.3em] uppercase">
-                    © 2025 Coupr Inc. — Engineered for Excellence
+                    © 2026 Coupr Inc. — Engineered for Excellence
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="https://coupr-web.web.app/privacy_policy" target="_blank"
+                        class="text-[10px] text-text-muted font-black tracking-[0.3em] uppercase hover:text-primary transition-colors">
+                        Privacy Policy
+                    </a>
+                    <a href="https://coupr-web.web.app/terms_conditions" target="_blank"
+                        class="text-[10px] text-text-muted font-black tracking-[0.3em] uppercase hover:text-primary transition-colors">
+                        Terms &amp; Conditions
+                    </a>
                 </div>
                 <button onclick="openModal()"
                     class="text-[10px] font-black text-text-main hover:text-primary transition-colors uppercase tracking-[0.3em] px-10 py-4 border-2 border-slate-subtle rounded-full bg-off-white">
@@ -977,6 +1029,39 @@
                     spaceBetween: 60
                 }
             }
+        });
+
+        // Initialize Testimonials Swiper
+        const testimonialSwiper = new Swiper('.swiper-testimonials', {
+            direction: 'horizontal',
+            slidesPerView: 1,
+            spaceBetween: 24,
+            grabCursor: true,
+            loop: true,
+            speed: 700,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+            },
+            pagination: {
+                el: '.swiper-pagination-testimonials',
+                clickable: true,
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 1.5,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 24,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 32,
+                },
+            },
         });
 
         // Intersection Observer for scroll animations
