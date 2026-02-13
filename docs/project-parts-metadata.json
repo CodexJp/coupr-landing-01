@@ -1,0 +1,35 @@
+{
+  "repository_type": "monolith",
+  "project_name": "Coupr Landing Page",
+  "domain": "coupr.io",
+  "parts": [
+    {
+      "part_id": "landing",
+      "display_name": "Coupr Landing Page",
+      "project_type_id": "web",
+      "root_path": "/",
+      "description": "Landing page estática de producto para Coupr (asistente de compras en tienda con IA). Incluye infraestructura AWS serverless.",
+      "primary_language": "HTML/JavaScript",
+      "framework": "None (Tailwind CSS via CDN)",
+      "architecture_pattern": "Jamstack simplificado (Static HTML + Serverless API)",
+      "entry_points": ["index.html"],
+      "infrastructure": {
+        "provider": "AWS",
+        "region": "us-east-1",
+        "services": ["S3", "CloudFront", "Lambda", "API Gateway v2", "Route53", "SES", "CloudWatch", "IAM"],
+        "iac_tool": "Terraform",
+        "iac_path": "infra/terraform/"
+      },
+      "documentation_requirements": {
+        "requires_api_scan": true,
+        "requires_data_models": false,
+        "requires_state_management": false,
+        "requires_ui_components": true,
+        "requires_deployment_config": true,
+        "requires_hardware_docs": false,
+        "requires_asset_inventory": true
+      }
+    }
+  ],
+  "integration_points": []
+}
