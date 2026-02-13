@@ -25,3 +25,13 @@ node_modules/
 # Logs
 *.log
 npm-debug.log*
+
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/terraform.tfstate
+infra/terraform/terraform.tfstate.backup
+infra/terraform/terraform.tfvars
+infra/terraform/.terraform.lock.hcl
+
+# Lambda zip artifacts
+infra/terraform/*.zip
