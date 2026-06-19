@@ -1,24 +1,24 @@
 {
   "repository_type": "monolith",
-  "project_name": "Coupr Landing Page",
-  "domain": "coupr.io",
+  "parts_count": 1,
   "parts": [
     {
       "part_id": "landing",
       "display_name": "Coupr Landing Page",
       "project_type_id": "web",
       "root_path": "/",
-      "description": "Landing page estática de producto para Coupr (asistente de compras en tienda con IA). Incluye infraestructura AWS serverless.",
-      "primary_language": "HTML/JavaScript",
-      "framework": "None (Tailwind CSS via CDN)",
-      "architecture_pattern": "Jamstack simplificado (Static HTML + Serverless API)",
-      "entry_points": ["index.html"],
-      "infrastructure": {
-        "provider": "AWS",
-        "region": "us-east-1",
-        "services": ["S3", "CloudFront", "Lambda", "API Gateway v2", "Route53", "SES", "CloudWatch", "IAM"],
-        "iac_tool": "Terraform",
-        "iac_path": "infra/terraform/"
+      "key_files": [
+        "index.html",
+        "lambdas/contact-form/index.js",
+        "infra/terraform/main.tf",
+        "infra/terraform/cloudfront.tf",
+        "infra/terraform/lambda.tf"
+      ],
+      "tech_stack": {
+        "frontend": ["HTML5", "Tailwind CSS (CDN)", "Swiper.js v11", "Vanilla JS"],
+        "backend": ["Node.js 20.x", "@aws-sdk/client-ses"],
+        "infra": ["Terraform >= 1.0", "AWS Provider ~> 5.0"],
+        "aws_services": ["S3", "CloudFront", "Route53", "API Gateway v2 HTTP", "Lambda", "SES", "IAM", "CloudWatch Logs", "ACM"]
       },
       "documentation_requirements": {
         "requires_api_scan": true,
@@ -26,10 +26,31 @@
         "requires_state_management": false,
         "requires_ui_components": true,
         "requires_deployment_config": true,
-        "requires_hardware_docs": false,
-        "requires_asset_inventory": true
+        "requires_asset_inventory": true,
+        "requires_hardware_docs": false
+      },
+      "entry_points": {
+        "frontend": "index.html",
+        "backend": "lambdas/contact-form/index.js#handler",
+        "infra": "infra/terraform/main.tf"
       }
     }
   ],
-  "integration_points": []
+  "integration_points": [
+    {
+      "from": "frontend (index.html)",
+      "to": "backend (Lambda via API Gateway)",
+      "type": "REST HTTP",
+      "endpoint": "POST /contact",
+      "auth": "none (public)",
+      "cors": "Access-Control-Allow-Origin: *"
+    },
+    {
+      "from": "Lambda contact-form",
+      "to": "Amazon SES",
+      "type": "AWS SDK v3",
+      "operation": "SendEmailCommand",
+      "identity": "contact@coupr.io"
+    }
+  ]
 }

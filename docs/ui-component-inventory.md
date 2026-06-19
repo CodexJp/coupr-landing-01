@@ -1,163 +1,203 @@
 # Inventario de Componentes UI — Coupr Landing Page
 
-> Generado: 2026-02-12 | Modo: initial_scan | Nivel: exhaustive
+> Generado: 2026-05-21 | Modo: full_rescan | Nivel: exhaustive
 
-## Resumen
+Todos los componentes están en `index.html` (single-file). No hay framework de componentes; cada "sección" es un bloque HTML con clases Tailwind.
 
-La landing page es un archivo HTML único sin framework de componentes. Los "componentes" son secciones HTML reutilizables estilizadas con Tailwind CSS. No existe un sistema de diseño formal — los estilos se aplican directamente con clases de utilidad.
+## Design Tokens (paleta y tipografía)
 
-## Design Tokens (Tailwind Config)
+Definidos en `tailwind.config` inline (`index.html:18-41`).
 
 ### Colores
 
 | Token | Valor | Uso |
 |---|---|---|
-| `primary` | `#E1701A` | Color principal (naranja Coupr) — CTAs, acentos, badges |
-| `secondary` | `#1A4E5E` | Color secundario (azul teal) — Fondos oscuros, secciones |
-| `off-white` | `#F8F8F8` | Fondo general de la página |
-| `pure-white` | `#FFFFFF` | Fondos de tarjetas y paneles |
-| `slate-subtle` | `#E5E7EB` | Bordes y separadores sutiles |
-| `text-main` | `#1F2937` | Texto principal |
-| `text-muted` | `#6B7280` | Texto secundario/muted |
+| `primary` | `#E1701A` | Marca principal — CTAs, acentos, links hover, "Best Choice", bordes activos del modal |
+| `secondary` | `#1A4E5E` | Color complementario — cards oscuras (Explore, testimonios alternos, Mission section, "Decision Intelligence" header de email) |
+| `off-white` | `#F8F8F8` | Fondo del body, bg de inputs disabled, bg de chips/badges suaves |
+| `pure-white` | `#FFFFFF` | Cards principales, modal content, nav backdrop blur |
+| `slate-subtle` | `#E5E7EB` | Bordes sutiles |
+| `text-main` | `#1F2937` | Texto primario |
+| `text-muted` | `#6B7280` | Texto secundario |
 
 ### Tipografía
 
-| Token | Font | Uso |
+| Familia | Carga | Uso |
 |---|---|---|
-| `font-display` | Space Grotesk | Headings (h1-h4), logo, títulos |
-| `font-sans` | Inter | Body text, párrafos, labels |
+| Inter | Google Fonts (weights 300/400/500/600/700) | Body, párrafos |
+| Space Grotesk | Google Fonts (weights 300/400/500/600/700) | Headings, números grandes, marca "coupr" |
 
 ### Border Radius
 
 | Token | Valor | Uso |
 |---|---|---|
-| `rounded-custom` | `1.5rem` | Tarjetas y secciones principales |
-| `rounded-full` | — | Botones CTA, badges |
-| `rounded-2xl` | — | Iconos, sub-componentes |
+| `custom` | `1.5rem` | Cards principales, sections con fondo blanco |
+| `asymmetric-border` (utility) | `4rem 1.5rem 4rem 1.5rem` | (definida pero no usada en HTML actual) |
 
-## Secciones de la Landing Page
+### Iconografía
 
-### 1. Navegación (`<nav>`)
-- **Tipo**: Layout — Header fijo
-- **Posición**: `fixed top-0 w-full z-50`
-- **Estilo**: Glass panel (`backdrop-blur-xl bg-pure-white/70`)
-- **Contenido**: Logo Coupr + 4 links de navegación + CTA "Get a Demo"
-- **Responsive**: Links ocultos en mobile (`hidden lg:flex`)
-
-### 2. Hero Section (`<header>`)
-- **Tipo**: Layout — Hero split
-- **Layout**: 2 columnas (texto izquierda, video derecha)
-- **Elementos**:
-  - Badge "Innovation in Retail" con punto animado (`animate-ping`)
-  - Heading principal (`text-4xl lg:text-6xl xl:text-7xl`)
-  - Subtítulo descriptivo
-  - 2 CTAs: "Get Your Free Demo" (primary) + "View Features" (secondary)
-  - Nota de confianza con ícono verificado
-  - Video mockup con tarjetas decorativas apiladas rotadas
-
-### 3. Marquee de Partners (`<section>`)
-- **Tipo**: Display — Logo marquee
-- **Estilo**: Fondo blanco con bordes, animación CSS infinita
-- **Contenido**: Logo de Milam's Markets repetido (12 items para loop seamless)
-- **Label**: "Live pilot program"
-- **Animación**: `marquee 20s linear infinite` (35s en desktop)
-
-### 4. Feature Cards — Ask/Explore/Discover (`<section>`)
-- **Tipo**: Display — Grid de tarjetas
-- **Layout**: Grid 12 columnas (4 col texto + 8 col tarjetas)
-- **Tarjetas**: 3 tarjetas con ilustraciones SVG
-  - **Ask** (blanca) — Buscar productos, precios, ingredientes
-  - **Explore** (secondary/azul) — Comprar según necesidades
-  - **Discover** (blanca) — Recomendaciones personalizadas
-- **Hover**: Border primary + translate-y
-
-### 5. Decision Intelligence (`<section id="process">`)
-- **Tipo**: Layout — Split section
-- **Layout**: Grid 12 columnas (7 col info + 5 col demo)
-- **Elementos**:
-  - 2 sub-features: "Scan & Identify" + "Side-by-Side"
-  - Demo interactiva: comparación de producto simulada (Brand A vs Brand B)
-  - Badge "Best Choice" en tarjeta ganadora
-
-### 6. Powerful Features Grid (`<section>`)
-- **Tipo**: Display — Feature grid
-- **Layout**: Grid 4 columnas (12 col mobile)
-- **Tarjetas**: 4 feature cards con iconos
-  - Smart Navigation (map)
-  - Add Shopping List (checklist)
-  - Dietary Filters (no_food)
-  - Deals & Discounts (local_offer)
-- **Hover**: Border primary + shadow + translate-y + icon scale
-
-### 7. Mission Section (`<section id="mission">`)
-- **Tipo**: Display — Full-width statement
-- **Estilo**: Fondo secondary con grid decorativo
-- **Contenido**: Heading grande (120px desktop), cita, descripción
-- **Texto clave**: "In-store shopping hasn't had its upgrade yet."
-
-### 8. Coupr Retail Media (`<section id="retailer">`)
-- **Tipo**: Display — CTA section (B2B)
-- **Estilo**: Fondo blanco con bordes
-- **Contenido**:
-  - 3 benefit icons (Higher Conversion, Higher ROI, Full-funnel reporting)
-  - CTA "Claim your aisle today"
-- **Target**: Marcas y retailers
-
-### 9. Screenshot Carousel (`<section>`)
-- **Tipo**: Display — Swiper carousel
-- **Library**: Swiper.js v11
-- **Slides**: 4 screenshots del producto (JPG)
-- **Features**: Navegación, paginación, autoplay (4s), keyboard, responsive breakpoints
-- **Efecto**: Slides no activos con opacity 0.4 y scale 0.85
-
-### 10. Success Stories / Testimonios (`<section id="testimonials">`)
-- **Tipo**: Display — Swiper carousel de testimonios
-- **Testimonios**: 4 tarjetas (alternando blanco/azul)
-  - Sarah J. (Busy Mom)
-  - Diego M. (Dad of 2) — azul
-  - Alma P. (Health Adv.)
-  - Linda M. (Weekly Shopper) — azul
-- **Features**: Loop, autoplay (5s), responsive (1-3 slides visibles)
-
-### 11. CTA Final (`<section>`)
-- **Tipo**: Display — Full-width CTA
-- **Estilo**: Fondo primary con texto watermark "COUPR"
-- **Contenido**: Heading "Ready to upgrade your store?" + CTA + nota de tiempo
-- **Scale**: Heading 100px en desktop
-
-### 12. Footer (`<footer>`)
-- **Tipo**: Layout — Footer multi-columna
-- **Layout**: Grid 12 columnas (5 col brand + 7 col links)
-- **Columnas**: Product, Company, Connect (Instagram + LinkedIn)
-- **Bottom bar**: Copyright + Privacy Policy + Terms & Conditions + Schedule Demo
-
-### 13. Modal de Demo Request
-- **Tipo**: Feedback — Modal overlay
-- **Trigger**: Múltiples botones `onclick="openModal()"`
-- **Campos**: fullName, email, organization, role, mobile, message
-- **Submit**: POST a API Gateway → success message → auto-close 3s
-- **Estilos**: Glass overlay + slide-up animation + rounded corners
-- **Cierre**: Click overlay, botón X, tecla Escape
+- **Material Symbols Outlined** — todos los iconos del sitio (cart, arrow, qr_code_scanner, compare_arrows, map, checklist, no_food, local_offer, trending_up, payments, visibility, verified, schedule, location_on, mail, close, check_circle, etc.)
 
 ## Patrones de Animación
 
-| Patrón | Clase CSS | Comportamiento |
+| Patrón | Definición CSS | Aplicación |
 |---|---|---|
-| Scroll reveal | `.animate-on-scroll` | Fade-in + translate-y con Intersection Observer |
-| Stagger | `.animate-delay-1..4` | Delay incremental 0.1-0.4s |
-| Slide from left | `.animate-from-left` | translateX(-40px) → 0 |
-| Slide from right | `.animate-from-right` | translateX(40px) → 0 |
-| Scale | `.animate-scale` | scale(0.97) → 1 |
-| Hero mockup | `.hero-mockup-frame` | Keyframe: translateY(40px) + scale(0.96) → normal |
-| Marquee | `.marquee-content` | translateX(0) → translateX(-50%) infinite |
-| Modal | `.modal-overlay.active` | opacity 0→1, content translateY(20px)→0 |
+| `animate-on-scroll` | opacity 0 → 1, translateY 30px → 0 sobre 0.6 s con cubic-bezier(0.16, 1, 0.3, 1) | Disparado por IntersectionObserver al entrar 10% del elemento (`rootMargin: 0px 0px -50px 0px`) |
+| `animate-delay-{1,2,3,4}` | `transition-delay: 0.1s-0.4s` | Stagger para cards en grids |
+| `animate-from-left` / `animate-from-right` | `translateX(±40px)` | Variantes laterales |
+| `animate-scale` | `translateY(30px) scale(0.97)` | Variante con zoom para CTAs grandes |
+| `hero-mockup-frame` | keyframe `mockupAppear` (1s ease-out delay 0.5s) | Video del hero |
+| Marquee | keyframe `marquee` (20s linear infinite, 35s en md+, mask gradient en bordes) | Logos del programa piloto |
+| Hover scale | `hover:scale-105`, `hover:-translate-y-2`, `hover:-translate-y-[10px]` | CTAs y cards |
 
-## Componentes Reutilizables (Patrones CSS)
+## Inventario de Secciones (13 + modal)
 
-| Clase | Descripción |
+Por orden de aparición en `index.html`.
+
+### 1. Nav (línea 389)
+- **Posición**: `fixed top-0`, full width, z-50.
+- **Estilo**: `backdrop-blur-xl bg-pure-white/70` con border bottom sutil.
+- **Contenido**: Logo (icono + wordmark "coupr") | Links desktop (Experience, Mission, Brands, Stories) | CTA primario "Get a Demo" (abre modal).
+- **Responsive**: links ocultos en mobile (`hidden lg:flex`). CTA siempre visible.
+
+### 2. Hero / Header (línea 419)
+- **Layout**: 2 columnas en lg+ (texto izq, video der).
+- **Texto izquierda**:
+  - Pill animada "Innovation in Retail" con ping verde.
+  - H1: "Ask anything. Your cart's got you." (got you. en `text-primary italic`).
+  - Párrafo + 2 CTAs ("Get Your Free Demo" abre modal, "View Features" scroll a #process).
+  - Subtitle: "No commitment required • 15-minute personalized walkthrough".
+- **Video derecha**: `<video autoplay loop muted playsinline>` con `assets/media/hero-video.mp4`, rotado -2deg con cards decorativas detrás (`rotate-3` y `rotate-6`).
+
+### 3. Live Pilot Program / Marquee (línea 474)
+- **Header**: dos líneas finas + "Live pilot program".
+- **Marquee**: 12 instancias del logo de Milam's Markets (`assets/media/milams-logo.png`) — 6 + 6 duplicado para loop continuo. Opacity 0.5, h-12.
+- **Mask gradient**: lateral fade en bordes.
+
+### 4. Features Intro — Ask / Explore / Discover (línea 523)
+- **Layout**: 12-col grid, 4 col texto + 8 col grid de 3 cards.
+- **Texto**: "Shop smarter, not harder." + descripción + barrita primary.
+- **3 cards**:
+  - **Ask** (blanca): ilustración `assets/media/ask.svg` + título uppercase + descripción.
+  - **Explore** (secondary, oscura, con hover lift): ilustración `assets/media/explore.svg`.
+  - **Discover** (blanca): ilustración `assets/media/discover.svg`.
+
+### 5. Decision Intelligence / Process (línea 572) — `#process`
+- **Layout**: 12-col grid, 7 col contenido + 5 col mockup.
+- **Contenido izquierda**:
+  - Tagline "DECISION INTELLIGENCE".
+  - H2: "Make better choices in seconds."
+  - 2 sub-features con iconos: **Scan & Identify** (`qr_code_scanner`) y **Side-by-Side** (`compare_arrows`).
+- **Mockup derecha**: card blanca con "Side-by-side comparison" mostrando Brand A vs Brand B (badge "REAL-TIME", "Best Choice" + verified icon).
+
+### 6. Powerful Features (línea 645)
+- **Header centrado**: tagline + H2 "Everything you need to shop smarter".
+- **Grid**: 4 cards en lg, 2 en md, 1 en mobile. Cada card con icono gradient + título uppercase + descripción.
+- **Cards**:
+  1. **Smart Navigation** (`map`)
+  2. **Add Shopping List** (`checklist`)
+  3. **Dietary Filters** (`no_food`)
+  4. **Deals & Discounts** (`local_offer`)
+- Hover: `hover:-translate-y-2`, `hover:shadow-2xl`, icon `scale-110`.
+
+### 7. Mission (línea 685) — `#mission`
+- **Estilo**: bg `secondary` (oscuro), padding grande, grid background sutil.
+- **Tagline**: "OUR MISSION".
+- **H2 enorme**: "In-store shopping hasn't had its **upgrade** yet." (upgrade en primary).
+- **Dos párrafos en grid**: cita italic + bullet point.
+
+### 8. Coupr Retail Media (línea 718) — `#retailer`
+- **Audiencia**: B2B (brands & retailers).
+- **Header**: tagline "FOR BRANDS & RETAILERS" + H2 "COUPR RETAIL MEDIA".
+- **Pitch**: 3 párrafos sobre 90/10 split entre in-store vs online.
+- **Grid 3 beneficios**: Higher Conversion (`trending_up`), Higher ROI (`payments`), Full-funnel reporting (`visibility`).
+- **CTA**: "Claim your aisle today" (bg `secondary`, abre modal).
+
+### 9. Screenshots Carousel (línea 756)
+- **Implementación**: Swiper.js v11 (`.swiper-carousel`).
+- **Config** (`index.html:1019-1060`): horizontal, centered, 1 slide visible (1.1/1.2/1.3 en breakpoints), autoplay 4s, pause on hover, navigation arrows, pagination, rewind, keyboard.
+- **Slides**: 4 screenshots (`Map Landing.jpg`, `Shop Page Landing.jpg`, `Deals Page Landing.jpg`, `Product Page Landing.jpg`).
+- **Estilo**: slides inactivos al 40% opacidad y scale 0.85; activo full opacity y scale 1. Drop shadow.
+
+### 10. Testimonials (línea 780) — `#testimonials`
+- **Header**: "Success Stories".
+- **Implementación**: Swiper.js v11 (`.swiper-testimonials`).
+- **Config** (`index.html:1063-1093`): 1 slide en mobile, 1.5 en sm, 2 en md, 3 en lg+. Autoplay 5s, loop continuo, paginación.
+- **4 testimonios** con alternancia de color:
+  1. **Sarah J.** (Busy Mom) — blanca
+  2. **Diego M.** (Dad of 2) — secondary oscura
+  3. **Alma P.** (Health Adv.) — blanca
+  4. **Linda M.** (Weekly Shopper) — secondary oscura
+
+### 11. CTA Final — "Ready to upgrade your store?" (línea 850)
+- **Estilo**: bg `primary` naranja, rounded `[3rem]`, watermark "COUPR" gigante al fondo (5% opacity).
+- **Contenido**: H2 grande + párrafo + botón blanco "Get Your Free Demo" (abre modal) + footer "15-minute call • No commitment • See results in action".
+
+### 12. Footer (línea 871)
+- **Grid 12-col**: 5 col brand + 7 col en 3 sub-cols.
+- **Brand**: logo + descripción + chips (location_on New York NY, mail contact@coupr.io).
+- **Columnas**:
+  - **Product**: Experience, Brands Program.
+  - **Company**: Mission, Success Stories.
+  - **Connect**: Instagram (SVG inline), LinkedIn (SVG inline).
+- **Bottom bar**: copyright "© 2026 Coupr Inc. — Engineered for Excellence" + Privacy Policy (link a coupr-web.web.app) + Terms & Conditions (link a coupr-web.web.app) + CTA secundario "Schedule a Demo".
+
+### 13. Demo Modal (línea 949-1013) — `#demoModal`
+- **Estructura**: overlay + container + content separados para animaciones (overlay `position: fixed inset-0`, container con `pointer-events: none` excepto el `.modal-content`).
+- **Activación**: cualquier botón con `onclick="openModal()"`. Cerrado por click en overlay, click en X, o tecla Escape.
+- **Animación de entrada**: opacity 0→1 y `translateY(20px) scale(0.95)` → `translateY(0) scale(1)` sobre 0.4s cubic-bezier.
+- **Body lock**: clase `modal-open` agrega `overflow: hidden` al body.
+- **Encabezado**: H3 "Let's work together" + subtitle "We'd love to show you around." + botón close (`close` icon).
+- **Contact info**: 3 chips (location_on, phone "(1) 857 498 0040", mail "contact@coupr.io").
+- **Form** (`#demoForm`):
+  - 5 inputs requeridos: fullName, email, organization, role, mobile.
+  - 1 textarea opcional: message (rows=3).
+  - Botón submit "Request a Demo" (full width, `bg-text-main` con hover a `bg-primary`).
+- **Comportamiento submit** (`index.html:1161-1228`):
+  1. Previene default.
+  2. `FormData` → `Object.fromEntries`.
+  3. Disable button, "Sending..." state, opacity 70%.
+  4. `fetch(CONTACT_ENDPOINT, POST, JSON)`.
+  5. Si OK: replace form HTML con success state (check_circle icon + "Thank you! We'll be in touch within 24 hours.") → cierra modal a los 3s → restaura form HTML 400ms después.
+  6. Si error: muestra mensaje rojo "Something went wrong. Please try again." debajo del botón por 5s, re-habilita botón.
+
+## JavaScript Inline (index.html:1017-1229)
+
+| Bloque | Responsabilidad |
 |---|---|
-| `.glass-panel` | `backdrop-blur-md bg-pure-white/90 border border-slate-subtle/50` |
-| `.floating-element` | `shadow-2xl transition-all duration-500 hover:-translate-y-2` |
-| `.modular-grid` | Grid 12 columnas con gap 1.5rem |
-| `.asymmetric-border` | `border-radius: 4rem 1.5rem 4rem 1.5rem` |
-| `.feature-image-container` | Container con hover scale + shadow para imágenes |
+| 1019-1060 | Init Swiper screenshots (`new Swiper('.swiper-carousel', {...})`) |
+| 1063-1093 | Init Swiper testimonials (`new Swiper('.swiper-testimonials', {...})`) |
+| 1095-1113 | `IntersectionObserver` para `.animate-on-scroll` (threshold 0.1, rootMargin top -50px) |
+| 1116-1132 | Smooth scroll para `a[href^="#"]` con offset de 100px (alto de nav) |
+| 1134-1155 | `openModal()` / `closeModal()` + listeners (click overlay, tecla Escape) |
+| 1157-1228 | Submit del form: fetch al `CONTACT_ENDPOINT`, estados de loading/success/error |
+
+## Patrones Reutilizables
+
+| Patrón | Lugares donde aparece |
+|---|---|
+| **CTA primary pill**: `bg-primary text-white font-black py-3 px-5 md:py-4 md:px-8 rounded-full text-[10px] md:text-xs tracking-widest uppercase` | Nav, hero, retailer, CTA final, modal submit (variante) |
+| **Card hover lift**: `hover:border-primary/50 hover:shadow-2xl hover:-translate-y-2 transition-all duration-500` | Features grid, Ask/Explore/Discover (variantes) |
+| **Tagline label**: `text-primary font-black tracking-[0.4em] uppercase text-[10px]` | Antes de cada H2 |
+| **Pill icon round**: `w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center shadow-lg shadow-primary/25` | Iconos en Powerful Features |
+| **Section large**: `mb-24 rounded-custom border border-slate-subtle/30 p-12 lg:p-20` | Mission, Retailer, Decision Intelligence |
+| **Container max-width**: `max-w-[1600px] mx-auto px-8` | Nav, main, footer |
+
+## Accesibilidad — Estado actual
+
+- ✅ `<html lang="en">` declarado.
+- ✅ Semántica: `<nav>`, `<header>`, `<main>`, `<section>`, `<footer>`, headings jerárquicos H1→H4.
+- ✅ Imágenes con `alt` (incluyendo el marquee y los screenshots del Swiper).
+- ✅ Modal con focus management básico (Escape para cerrar).
+- ⚠️ El modal no tiene `role="dialog"` ni `aria-modal="true"` ni `aria-labelledby` apuntando al H3.
+- ⚠️ Los botones `<button onclick>` no tienen `aria-label` explícitos para CTAs con iconos.
+- ⚠️ Los Swiper carousels no anuncian cambio de slide a screen readers.
+- ⚠️ Contrast ratio del texto `text-text-muted` (#6B7280) sobre fondos `off-white` cumple WCAG AA para tamaños grandes pero hay que verificar en cuerpo pequeño.
+- ⚠️ El video del hero no tiene `<track>` con captions/descripción.
+
+## Convenciones Observadas
+
+- **Mobile-first responsive**: `text-3xl lg:text-7xl`, `py-3 md:py-4`, `hidden lg:flex`, etc.
+- **Espaciado**: secciones separadas por `mb-24` (96px). Paddings internos `p-12 lg:p-20`.
+- **Letter spacing**: `tracking-[0.2em]` a `tracking-[0.5em]` para taglines pequeños uppercase; `tracking-tight`/`tracking-tighter` para headings grandes.
+- **Container query plugin** está cargado pero no se observa uso de `@container`.

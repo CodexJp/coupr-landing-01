@@ -11,8 +11,19 @@
 # Claude Code
 .claude/
 
+# Other AI assistant / editor local config
+.agents/
+.cline/
+.codebuddy/
+.continue/
+.kiro/
+skills-lock.json
+
 # Playwright MCP screenshots
 .playwright-mcp/
+
+# Archived docs
+docs/.archive/
 
 # Node modules (if added later)
 node_modules/

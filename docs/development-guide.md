@@ -1,20 +1,21 @@
 # Guía de Desarrollo — Coupr Landing Page
 
-> Generado: 2026-02-12 | Modo: initial_scan | Nivel: exhaustive
+> Generado: 2026-05-21 | Modo: full_rescan | Nivel: exhaustive
 
 ## Prerrequisitos
 
-| Herramienta | Versión | Propósito |
+| Herramienta | Versión | Por qué |
 |---|---|---|
-| Navegador moderno | Chrome/Firefox/Safari | Visualización y testing |
-| Editor de código | Cualquiera (VS Code recomendado) | Edición de archivos |
-| Terraform | >= 1.0 | Gestión de infraestructura |
-| AWS CLI | v2 | Interacción con AWS |
-| Credenciales AWS | Cuenta dev (009160036798) | Deploy de infraestructura |
+| Navegador moderno | Chrome / Firefox / Safari | Edición y prueba visual |
+| Editor de código | VS Code (recomendado) | Edición del proyecto |
+| Terraform | `>= 1.0` | Gestión de infraestructura AWS |
+| AWS CLI | v2 | Deploy a S3 e invalidación de CloudFront |
+| Credenciales AWS | Acceso a cuenta dev `009160036798` | Aplicar cambios de infra |
+| Python 3 (opcional) | Cualquier 3.x | Servir el HTML localmente |
 
-> **Nota**: No se requiere Node.js local ni npm — el proyecto no tiene package.json ni dependencias locales. La Lambda usa Node.js 20.x incluido en el runtime de AWS.
+> **Nota**: No se requiere Node.js local. El proyecto no tiene `package.json`. La Lambda corre con el runtime de Node.js 20.x de AWS.
 
-## Setup del Entorno
+## Setup Inicial
 
 ### 1. Clonar el repositorio
 
@@ -23,178 +24,234 @@ git clone <repo-url>
 cd landingpage
 ```
 
-### 2. Desarrollo local del frontend
-
-No se requiere setup especial. Abrir `index.html` directamente en un navegador:
+### 2. Configurar AWS CLI (si necesitas deploy de infra)
 
 ```bash
-# macOS
-open index.html
-
-# Linux
-xdg-open index.html
-
-# O usar cualquier servidor local:
-python3 -m http.server 8000
-# Luego visitar http://localhost:8000
+aws configure
+# AWS Access Key ID:     <de la cuenta dev>
+# AWS Secret Access Key: <de la cuenta dev>
+# Default region:        us-east-1
+# Default output format: json
 ```
 
-> **Nota**: Tailwind CSS se carga vía CDN en runtime, por lo que se necesita conexión a internet para ver los estilos correctamente.
+Verifica que estás en la cuenta correcta:
 
-### 3. Configurar infraestructura (si es necesario)
+```bash
+aws sts get-caller-identity --query Account --output text
+# Esperado: 009160036798
+```
+
+### 3. Configurar Terraform (sólo si trabajarás en infra)
 
 ```bash
 cd infra/terraform
-
-# Crear archivo de variables
 cp terraform.tfvars.example terraform.tfvars
-# Editar terraform.tfvars con el email del destinatario
+# Edita terraform.tfvars con el email destinatario, p.ej.:
+# recipient_email = "tu-email@coupr.io"
 
-# Inicializar Terraform
 terraform init
-
-# Verificar plan
-terraform plan
-
-# Aplicar cambios
-terraform apply
 ```
 
-## Estructura de Archivos a Modificar
+## Desarrollo Local del Frontend
 
-| Archivo | Qué contiene | Cuándo modificar |
-|---|---|---|
-| `index.html` | Todo el frontend (HTML + CSS + JS) | Cambios de contenido, diseño, o funcionalidad del frontend |
-| `lambdas/contact-form/index.js` | Handler del formulario | Cambios en lógica de envío de email o validación |
-| `infra/terraform/*.tf` | Infraestructura AWS | Cambios en la infraestructura |
-| `assets/brand/*` | Logo y favicon | Cambios de branding |
-| `assets/media/*` | Video, ilustraciones, screenshots | Actualización de contenido visual |
+No hay build step. Hay dos formas de visualizar `index.html`:
 
-## Comandos de Desarrollo
-
-### Frontend
-
-No hay build step. Los cambios en `index.html` son inmediatos al refrescar el navegador.
+### Opción A: Abrirlo directamente
 
 ```bash
-# Abrir en navegador
-open index.html
+open index.html              # macOS
+xdg-open index.html          # Linux
+start index.html             # Windows
+```
 
-# Servir localmente con recarga manual
+> ⚠️ Algunos navegadores bloquean recursos cargados desde CDN sobre el protocolo `file://`. Si los estilos no aparecen, usa la opción B.
+
+### Opción B: Servidor local con Python
+
+```bash
 python3 -m http.server 8000
+# Visitar http://localhost:8000
 ```
 
-### Infraestructura
+### Workflow típico
+
+1. Editar `index.html` directamente (es el único archivo de frontend).
+2. Refrescar el navegador (no hay HMR, no hay watch).
+3. Inspeccionar en DevTools.
+
+> Tailwind se compila en el navegador via CDN runtime. Se necesita conexión a internet para que los estilos rendericen correctamente.
+
+## Desarrollo del Backend (Lambda)
+
+### Estructura
+
+- Código en `lambdas/contact-form/index.js` (ES5/CommonJS, `exports.handler`).
+- Sin `package.json` propio — todas las dependencias vienen del runtime AWS Lambda Node.js 20.x.
+
+### Flujo para modificar la Lambda
+
+1. Editar `lambdas/contact-form/index.js`.
+2. Aplicar con Terraform (re-empaqueta + sube automáticamente):
+
+   ```bash
+   cd infra/terraform
+   terraform apply
+   ```
+
+   Terraform detecta el cambio vía `source_code_hash` del `archive_file`.
+
+3. Verificar en CloudWatch que la nueva versión está activa:
+
+   ```bash
+   aws lambda get-function --function-name coupr-landing-contact-form --query 'Configuration.[LastModified,Version]'
+   ```
+
+### Testing local (opcional)
+
+No hay runner local oficial, pero puedes simular el handler con `node`:
 
 ```bash
-cd infra/terraform
-
-# Ver estado actual
-terraform show
-
-# Planificar cambios
-terraform plan
-
-# Aplicar cambios
-terraform apply
-
-# Ver outputs (URLs, IDs)
-terraform output
-
-# Destruir infraestructura (¡cuidado!)
-terraform destroy
+cd lambdas/contact-form
+SENDER_EMAIL=contact@coupr.io RECIPIENT_EMAIL=test@example.com node -e "
+  const { handler } = require('./index');
+  handler({
+    requestContext: { http: { method: 'POST' } },
+    body: JSON.stringify({
+      fullName: 'Test', email: 'test@test.com',
+      organization: 'X', role: 'Dev', mobile: '555-0000'
+    })
+  }).then(console.log).catch(console.error);
+"
 ```
 
-### Lambda
+> Requiere `@aws-sdk/client-ses` instalado localmente para invocar realmente a SES. Si solo quieres validar el camino de validación, comenta `await ses.send(command)`.
+
+## Convenciones de Código
+
+### HTML / Tailwind (frontend)
+
+- **Mobile-first**: clases base son mobile; usa `md:`, `lg:`, `xl:` para breakpoints mayores.
+- **Espaciado de secciones**: `mb-24` (96px) entre `<section>`s.
+- **Containers**: `max-w-[1600px] mx-auto px-8`.
+- **Cards**: `rounded-custom border border-slate-subtle/30 p-12 lg:p-20` para bloques grandes; `rounded-2xl border border-slate-subtle/30 p-8` para cards pequeñas.
+- **Colores de marca**: usar `primary`/`secondary`/`text-main`/`text-muted` definidos en el config; evitar hex literals.
+- **Iconos**: Material Symbols Outlined (`<span class="material-symbols-outlined">icon_name</span>`).
+- **Animación on-scroll**: agregar clase `animate-on-scroll` al elemento; opcionalmente `animate-delay-{1..4}`, `animate-from-left/right`, `animate-scale`.
+- **Smooth scroll**: cualquier `<a href="#some-id">` activa el scroll suave automáticamente (interceptado en JS).
+
+### JavaScript (frontend)
+
+- Vanilla JS, sin frameworks.
+- Todo el JS vive inline en `<script>` al final del `<body>` de `index.html` (líneas 1017-1229).
+- Listeners se agregan con `addEventListener`.
+- Para abrir el modal desde cualquier botón, usar `onclick="openModal()"`.
+
+### Lambda (`lambdas/contact-form/index.js`)
+
+- Estilo CommonJS (`require`, `exports.handler`).
+- Validación temprana, return rápido con códigos HTTP apropiados (400 input inválido, 500 error interno).
+- Todo input al HTML del email pasa por `escapeHtml()`.
+- Truncar inputs a `MAX_FIELD_LENGTH` (500 chars).
+- Logs con `console.error` (van a CloudWatch automáticamente).
+
+### Terraform
+
+- Resources nombrados con prefijo `${var.project_name}-` (default `coupr-landing`).
+- Tags obligatorios via `default_tags` en `provider.tf`: `Environment`, `Terraform=true`, `Project=coupr`, `Owner=DevOps`.
+- Variables con `description` siempre, `sensitive = true` para secretos.
+
+## Testing Manual
+
+No hay tests automatizados. Smoke tests recomendados:
+
+### 1. Health check del sitio
 
 ```bash
-# Probar endpoint con curl
-curl -X POST https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact \
-  -H "Content-Type: application/json" \
-  -d '{"fullName":"Test","email":"test@test.com","organization":"Test Co","role":"Dev","mobile":"555-0000"}'
-
-# Ver logs de Lambda
-aws logs tail /aws/lambda/coupr-landing-contact-form --follow
-```
-
-### Deploy del frontend a S3
-
-```bash
-# Sync de archivos estáticos a S3
-aws s3 sync . s3://$(terraform -chdir=infra/terraform output -raw s3_bucket_name) \
-  --exclude ".git/*" \
-  --exclude "_bmad/*" \
-  --exclude "_bmad-output/*" \
-  --exclude "infra/*" \
-  --exclude "lambdas/*" \
-  --exclude "docs/*" \
-  --exclude ".claude/*" \
-  --exclude ".playwright-mcp/*" \
-  --exclude ".DS_Store" \
-  --exclude "*.md"
-
-# Invalidar caché de CloudFront
-aws cloudfront create-invalidation \
-  --distribution-id $(terraform -chdir=infra/terraform output -raw cloudfront_distribution_id) \
-  --paths "/*"
-```
-
-## Testing
-
-### Testing Manual
-
-No hay tests automatizados. El testing es completamente manual:
-
-1. **Visual**: Abrir `index.html` en navegador, verificar todas las secciones
-2. **Responsive**: Probar en diferentes tamaños de pantalla (mobile, tablet, desktop)
-3. **Formulario**: Enviar un formulario de prueba y verificar recepción de email
-4. **Navegación**: Verificar que los anchor links (#process, #mission, etc.) funcionan
-5. **Modal**: Verificar apertura/cierre del modal (click, overlay, Escape)
-6. **Carruseles**: Verificar navegación, autoplay, y responsive de Swiper
-7. **Animaciones**: Verificar scroll animations con Intersection Observer
-
-### Testing del Endpoint
-
-```bash
-# Test exitoso
-curl -s -o /dev/null -w "%{http_code}" -X POST \
-  https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact \
-  -H "Content-Type: application/json" \
-  -d '{"fullName":"Test","email":"test@test.com","organization":"Co","role":"Dev","mobile":"555"}'
+curl -s -o /dev/null -w "%{http_code}\n" https://coupr.io
 # Esperado: 200
+```
 
-# Test campos faltantes
-curl -s -X POST \
-  https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact \
+### 2. CORS preflight del endpoint
+
+```bash
+curl -s -o /dev/null -w "%{http_code}\n" -X OPTIONS \
+  https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact
+# Esperado: 200
+```
+
+### 3. Envío exitoso (cuidado: dispara email real)
+
+```bash
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
+  -H "Content-Type: application/json" \
+  -d '{"fullName":"Test","email":"test@test.com","organization":"Test","role":"Dev","mobile":"555"}'
+# Esperado: 200 {"message":"Email sent successfully"}
+```
+
+### 4. Caso de error de validación
+
+```bash
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
   -H "Content-Type: application/json" \
   -d '{"fullName":"Test"}'
-# Esperado: 400, "Missing required fields: email, organization, role, mobile"
+# Esperado: 400 {"message":"Missing required fields: email, organization, role, mobile"}
+```
 
-# Test email inválido
-curl -s -X POST \
-  https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact \
+### 5. Validación de email malformado
+
+```bash
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
   -H "Content-Type: application/json" \
-  -d '{"fullName":"T","email":"invalid","organization":"C","role":"D","mobile":"5"}'
-# Esperado: 400, "Invalid email address"
+  -d '{"fullName":"T","email":"no-arroba","organization":"X","role":"X","mobile":"X"}'
+# Esperado: 400 {"message":"Invalid email address"}
 ```
 
-## Convenciones del Proyecto
+### 6. Verificación visual en producción
 
-### Estilo de código
-- **HTML**: Indentación con 4 espacios
-- **Tailwind**: Clases en línea, sin archivos CSS separados
-- **JavaScript**: Vanilla JS, funciones globales para modal
-- **Terraform**: Convenciones estándar de HCL, naming con `${var.project_name}-`
+- Abrir https://coupr.io en navegador.
+- Validar:
+  - El video del hero reproduce en loop sin sonido.
+  - El marquee de logos rota continuamente.
+  - Los Swiper carousels (screenshots y testimonials) avanzan solos cada 4-5 s.
+  - El modal de demo abre/cierra con click y con Escape.
+  - El form envía y muestra el success state.
 
-### Naming de assets
-- Brand: lowercase (`coupr-logo.png`, `favicon.svg`)
-- Media: Title Case con espacios (screenshots legacy) o lowercase (nuevos SVGs)
+## Convenciones de Git
 
-### Commits recientes (referencia de estilo)
-```
-Improve mobile responsiveness: buttons, hero layout, and logo marquee
-Improve hero video quality: keep 1080p with CRF 23
-Optimize hero video: 49MB → 3.8MB (92% reduction)
-Add media assets for hero video, logos, and screenshots
-Update hero section to split layout with stacked video mockups
-```
+Basado en el log reciente:
+
+- Mensajes en inglés, imperativo: `Add ...`, `Improve ...`, `Fix ...`.
+- Cambios atómicos por feature/fix.
+- No hay branch policy estricta documentada (asumir trunk-based en `main`).
+
+## Troubleshooting Común
+
+### Los estilos no se ven localmente
+
+- Verifica conexión a internet (Tailwind viene por CDN).
+- Si abriste el archivo con `file://`, usa `python3 -m http.server 8000`.
+- Revisa la pestaña Network del DevTools por errores CORS.
+
+### El form no envía / muestra "Something went wrong"
+
+- Verifica que el endpoint en `index.html:1158` apunta al API Gateway correcto.
+- `aws logs tail /aws/lambda/coupr-landing-contact-form --follow` para ver errores.
+
+### `terraform apply` falla con error de credenciales
+
+- `aws sts get-caller-identity` para confirmar que estás logueado en la cuenta `009160036798`.
+- `aws configure list` para revisar profile activo.
+
+### El cambio en la Lambda no se refleja
+
+- Confirma que ejecutaste `terraform apply` después de editar.
+- `source_code_hash` debe haber cambiado: `terraform show | grep source_code_hash`.
+
+## Recursos Externos Documentados
+
+- [Tailwind CSS docs](https://tailwindcss.com/docs)
+- [Swiper.js v11 docs](https://swiperjs.com/swiper-api)
+- [Material Symbols](https://fonts.google.com/icons)
+- [AWS SDK v3 — SES Client](https://docs.aws.amazon.com/AWSJavaScriptSDK/v3/latest/client/ses/)
+- [Terraform AWS Provider](https://registry.terraform.io/providers/hashicorp/aws/latest/docs)
+- [API Gateway v2 HTTP](https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api.html)

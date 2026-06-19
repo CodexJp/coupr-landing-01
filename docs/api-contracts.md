@@ -1,58 +1,85 @@
 # Contratos de API — Coupr Landing Page
 
-> Generado: 2026-02-12 | Modo: initial_scan | Nivel: exhaustive
+> Generado: 2026-05-21 | Modo: full_rescan | Nivel: exhaustive
 
-## Resumen
+Este documento describe la API expuesta por la landing page. Actualmente hay **1 endpoint**.
 
-La landing page tiene un único endpoint de API para procesamiento del formulario de solicitud de demo.
+## Endpoint: `POST /contact`
 
-- **Base URL**: `https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com`
-- **Protocolo**: HTTP API (API Gateway v2)
-- **Autenticación**: Ninguna (endpoint público)
-- **CORS**: Habilitado (`Access-Control-Allow-Origin: *`)
+Recibe solicitudes de demo desde el formulario modal de la landing y dispara un email transaccional vía SES al equipo comercial.
 
-## Endpoints
+### URLs
 
-### POST /contact
+| Entorno | URL |
+|---|---|
+| Producción (en uso por `index.html:1158`) | `https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact` |
+| Producción (documentado en `README.md`) | `https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact` ⚠️ |
 
-**Propósito**: Recibir datos del formulario de solicitud de demo y enviar email de notificación al equipo de Coupr.
+> ⚠️ Existe una discrepancia entre el endpoint hardcoded en el frontend y el documentado en el README. La fuente de verdad operativa es `index.html:1158`. Tras cualquier `terraform destroy/apply` que recree el API Gateway, hay que actualizar el `CONTACT_ENDPOINT` en `index.html` y el README.
 
-**URL**: `https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact`
+### Implementación
 
-#### Request
+| Componente | Definido en |
+|---|---|
+| Recurso API Gateway | `infra/terraform/main.tf` — `aws_apigatewayv2_api.landing` (HTTP) + route `POST /contact` |
+| Stage | `$default` con `auto_deploy = true` |
+| Integration | `AWS_PROXY` con `payload_format_version = "2.0"` |
+| Handler | `lambdas/contact-form/index.js#handler` |
+| Runtime | Node.js 20.x, 128 MB, 10 s timeout |
 
-```http
-POST /contact HTTP/1.1
+### CORS
+
+Definido tanto en API Gateway (`cors_configuration` en `main.tf`) como en la Lambda (response headers en `index.js`).
+
+| Header | Valor |
+|---|---|
+| `Access-Control-Allow-Origin` | `*` |
+| `Access-Control-Allow-Methods` | `POST, OPTIONS` |
+| `Access-Control-Allow-Headers` | `Content-Type` |
+
+> **Preflight**: la Lambda detecta `event.requestContext?.http?.method === "OPTIONS"` y responde 200 sin procesar el body.
+
+### Autenticación
+
+**Ninguna**. El endpoint es público. No requiere API key, token, ni firma.
+
+## Esquema de Request
+
+### Headers
+
+```
 Content-Type: application/json
 ```
 
-**Body (JSON)**:
+### Body (JSON)
 
-| Campo | Tipo | Requerido | Max Length | Descripción |
+| Campo | Tipo | Requerido | Validación | Notas |
 |---|---|---|---|---|
-| `fullName` | string | Sí | 500 | Nombre completo del prospecto |
-| `email` | string | Sí | 500 | Email del prospecto (validado con regex) |
-| `organization` | string | Sí | 500 | Empresa/organización |
-| `role` | string | Sí | 500 | Cargo/rol del prospecto |
-| `mobile` | string | Sí | 500 | Número de teléfono |
-| `message` | string | No | 500 | Mensaje adicional (opcional) |
+| `fullName` | string | ✅ | trim no vacío, max 500 chars | Truncado a 500 chars |
+| `email` | string | ✅ | regex `^[^\s@]+@[^\s@]+\.[^\s@]+$` + max 500 chars | Validación básica de formato |
+| `organization` | string | ✅ | trim no vacío, max 500 chars | Empresa del solicitante |
+| `role` | string | ✅ | trim no vacío, max 500 chars | Cargo del solicitante |
+| `mobile` | string | ✅ | trim no vacío, max 500 chars | Número de teléfono (sin validación de formato) |
+| `message` | string | ❌ | max 500 chars | Mensaje libre opcional |
 
-**Ejemplo de request**:
+### Ejemplo de Request
 
-```json
-{
-  "fullName": "John Doe",
-  "email": "john@example.com",
-  "organization": "Acme Inc",
-  "role": "Operations Manager",
-  "mobile": "(555) 123-4567",
-  "message": "Interested in a pilot program"
-}
+```bash
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullName": "Jane Doe",
+    "email": "jane@example.com",
+    "organization": "Acme Inc",
+    "role": "Operations Manager",
+    "mobile": "+1 555 010 0123",
+    "message": "Interesados en pilotos para 5 tiendas en Q3."
+  }'
 ```
 
-#### Responses
+## Esquemas de Response
 
-**200 OK** — Email enviado exitosamente:
+### 200 OK — Éxito
 
 ```json
 {
@@ -60,15 +87,25 @@ Content-Type: application/json
 }
 ```
 
-**400 Bad Request** — Campos requeridos faltantes:
+Headers:
+```
+Content-Type: application/json
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: POST, OPTIONS
+Access-Control-Allow-Headers: Content-Type
+```
+
+### 400 Bad Request — Campos requeridos faltantes
 
 ```json
 {
-  "message": "Missing required fields: email, mobile"
+  "message": "Missing required fields: fullName, email"
 }
 ```
 
-**400 Bad Request** — Email inválido:
+Se dispara cuando alguno de los 5 campos requeridos está ausente, es `null`, o solo contiene whitespace.
+
+### 400 Bad Request — Email inválido
 
 ```json
 {
@@ -76,7 +113,9 @@ Content-Type: application/json
 }
 ```
 
-**500 Internal Server Error** — Error del servidor (SES, etc.):
+Se dispara cuando el campo `email` no matchea el regex `^[^\s@]+@[^\s@]+\.[^\s@]+$`.
+
+### 500 Internal Server Error — Fallo de envío
 
 ```json
 {
@@ -84,41 +123,95 @@ Content-Type: application/json
 }
 ```
 
-#### CORS Preflight
+Se dispara cuando `SESClient.send()` falla. El error real se loguea en CloudWatch (`/aws/lambda/coupr-landing-contact-form`) con `console.error("Error sending email:", error)`.
 
-```http
-OPTIONS /contact HTTP/1.1
+## Flujo de Procesamiento
+
+```text
+┌─────────────────┐
+│  Form submit    │  index.html (fetch POST)
+│  in browser     │
+└────────┬────────┘
+         │ JSON body
+         ▼
+┌─────────────────┐
+│  API Gateway v2 │  POST /contact (HTTP API)
+│  CORS, Routing  │
+└────────┬────────┘
+         │ AWS_PROXY (payload v2.0)
+         ▼
+┌────────────────────────────────────────────┐
+│  Lambda contact-form (Node.js 20.x)        │
+│                                             │
+│  1. OPTIONS? → 200 CORS preflight          │
+│  2. JSON.parse(body)                        │
+│  3. Validate required fields → 400 if miss │
+│  4. Validate email regex → 400 if invalid  │
+│  5. Truncate fields to 500 chars           │
+│  6. Build HTML email (escapeHtml)          │
+│  7. SESClient.send(SendEmailCommand)       │
+│  8. Return 200 OK                          │
+└────────┬───────────────────────────────────┘
+         │ AWS SDK v3
+         ▼
+┌─────────────────┐
+│  Amazon SES     │  From: contact@coupr.io
+│  us-east-1      │  To:   var.recipient_email
+└─────────────────┘
 ```
 
-**Response headers**:
+## Comportamiento del Email Enviado
+
+| Campo | Valor |
+|---|---|
+| `Source` (From) | `process.env.SENDER_EMAIL` (default `contact@coupr.io`, identidad verificada en SES) |
+| `Destination.ToAddresses` | `[process.env.RECIPIENT_EMAIL]` (única dirección) |
+| `Subject` | `New Demo Request from {fullName} - {organization}` |
+| `Body.Html` | Template HTML inline con tabla styled (paleta marca: primary `#E1701A`, secondary `#1A4E5E`) y logo |
+| `Charset` | `UTF-8` (subject + body) |
+
+Todo input que entra al HTML pasa por `escapeHtml()` que escapa `&<>"'`. El campo `email` y `mobile` también pasan por `encodeURIComponent` cuando se usan en `mailto:`/`tel:`.
+
+## Seguridad
+
+- ✅ HTTPS obligatorio (API Gateway sólo expone HTTPS).
+- ✅ CORS permite cualquier origen (`*`) — necesario porque la landing se sirvió temporalmente desde Vercel durante desarrollo.
+- ✅ Validación de campos requeridos y formato de email.
+- ✅ Truncado a 500 chars previene payloads excesivamente grandes.
+- ✅ `escapeHtml()` previene HTML injection en el email enviado.
+- ⚠️ **Sin rate limiting**. Un atacante puede enviar emails ilimitados desde la misma IP.
+- ⚠️ **Sin CAPTCHA / Turnstile / honeypot**. Bots pueden submitear sin obstáculo.
+- ⚠️ **`Access-Control-Allow-Origin: *`** permite invocar el endpoint desde cualquier origen (no solo coupr.io).
+- ⚠️ **Sin verificación de bounce/complaint**. SES enviará a cualquier dirección que el destinatario tenga configurada en `terraform.tfvars`.
+
+## Testing Manual
+
+```bash
+# Caso éxito (esperado: 200)
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
+  -H "Content-Type: application/json" \
+  -d '{"fullName":"Test","email":"test@test.com","organization":"Test Co","role":"Dev","mobile":"555-0000"}'
+
+# Caso campos faltantes (esperado: 400)
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
+  -H "Content-Type: application/json" \
+  -d '{"fullName":"Test"}'
+
+# Caso email inválido (esperado: 400)
+curl -X POST https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact \
+  -H "Content-Type: application/json" \
+  -d '{"fullName":"Test","email":"no-arroba","organization":"X","role":"X","mobile":"X"}'
+
+# Preflight OPTIONS (esperado: 200 con headers CORS)
+curl -s -o /dev/null -w "%{http_code}" -X OPTIONS \
+  https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact
 ```
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Methods: POST, OPTIONS
-Access-Control-Allow-Headers: Content-Type
+
+## Outputs de Terraform Relevantes
+
+```bash
+cd infra/terraform
+terraform output api_endpoint          # Base URL del API Gateway
+terraform output contact_form_url      # URL completa al endpoint /contact
+terraform output lambda_function_name  # Para logs (aws logs tail)
 ```
-
-#### Validación
-
-1. **Campos requeridos**: `fullName`, `email`, `organization`, `role`, `mobile` — todos deben estar presentes y no vacíos
-2. **Formato de email**: Validado con regex `/^[^\s@]+@[^\s@]+\.[^\s@]+$/`
-3. **Truncado**: Todos los campos se truncan a 500 caracteres máximo
-4. **HTML escape**: Todos los valores se escapan antes de insertarlos en el email HTML
-
-#### Efecto Secundario
-
-Al procesar exitosamente el request, la Lambda envía un email HTML con los datos del formulario:
-- **De**: `contact@coupr.io` (variable de entorno `SENDER_EMAIL`)
-- **Para**: Email configurado en variable de entorno `RECIPIENT_EMAIL`
-- **Asunto**: `"New Demo Request from {fullName} - {organization}"`
-- **Body**: Email HTML con branding de Coupr y tabla de datos del formulario
-
-## Infraestructura de la API
-
-| Componente | Recurso AWS | Configuración |
-|---|---|---|
-| API | API Gateway v2 HTTP | `coupr-landing-api` |
-| Stage | `$default` | Auto-deploy habilitado |
-| Integración | AWS_PROXY | Payload format v2.0 |
-| Función | Lambda Node.js 20.x | 128MB RAM, 10s timeout |
-| Permisos | IAM Role | SES:SendEmail + CloudWatch Logs |
-| Logging | CloudWatch | 14 días retención |
