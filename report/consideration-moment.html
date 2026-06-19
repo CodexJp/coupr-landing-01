@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Measuring the Consideration Moment — Coupr Research</title>
+    <meta name="description" content="A new retail data primitive: closed-loop attribution from in-aisle engagement to register receipt. Coupr Research, May 2026." />
+    <meta property="og:title" content="Measuring the Consideration Moment — Coupr Research" />
+    <meta property="og:description" content="Closed-loop, deterministic attribution from in-aisle engagement to register receipt. Methodology paper, May 2026." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://coupr.io/report/consideration-moment" />
+    <link rel="icon" type="image/svg+xml" href="/assets/brand/favicon.svg" />
+
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1WH5S9BB9Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1WH5S9BB9Q');
+    </script>
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,500;8..60,600;8..60,700&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#E1701A",
+                        secondary: "#1A4E5E",
+                        "off-white": "#F8F8F8",
+                        "pure-white": "#FFFFFF",
+                        "slate-subtle": "#E5E7EB",
+                        "text-main": "#1F2937",
+                        "text-muted": "#6B7280",
+                        "paper-cream": "#FAF6F0"
+                    },
+                    fontFamily: {
+                        sans: ["Inter", "sans-serif"],
+                        display: ["Space Grotesk", "sans-serif"],
+                        serif: ["Source Serif 4", "Georgia", "Cambria", "serif"]
+                    },
+                    borderRadius: { 'custom': '1.5rem' }
+                }
+            }
+        };
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-paper-cream text-text-main font-serif selection:bg-primary/20 selection:text-primary overflow-x-hidden;
+            }
+            .display, h1, h2, h3, h4 {
+                @apply font-display tracking-tight;
+            }
+        }
+        html { scroll-behavior: smooth; }
+
+        .nav-active { color: #E1701A !important; position: relative; }
+        .nav-active::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: -8px;
+            height: 2px;
+            background: #E1701A;
+            border-radius: 1px;
+        }
+
+        .paper-grain {
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 18% 22%, rgba(225,112,26,0.06) 0px, transparent 40%),
+                radial-gradient(circle at 82% 78%, rgba(26,78,94,0.05) 0px, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Stat cards */
+        .stat-card {
+            background: white;
+            border: 1px solid rgba(229, 231, 235, 0.7);
+            border-radius: 1rem;
+            padding: 1.75rem 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
+        }
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 4px;
+            height: 100%;
+            background: #E1701A;
+        }
+        .stat-card:hover { transform: translateY(-3px); box-shadow: 0 12px 30px -10px rgba(0,0,0,0.12); }
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: 3.25rem;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            color: #E1701A;
+        }
+
+        /* ====== Editorial paper body (brand-ported from paper-branded) ====== */
+        .pf-body { font-family: 'Source Serif 4', Georgia, Cambria, serif; font-size: 1.0625rem; line-height: 1.7; color: #2b2f36; }
+        .pf-body h2 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.75rem; line-height: 1.2;
+            letter-spacing: -0.02em; color: #1A4E5E; margin: 3.5rem 0 1rem;
+            padding-bottom: 0.5rem; border-bottom: 2px solid #E1701A; font-weight: 700;
+        }
+        .pf-body h2:first-child { margin-top: 2rem; }
+        .pf-body h3 {
+            font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; line-height: 1.3;
+            letter-spacing: -0.01em; color: #1A4E5E; margin: 2.25rem 0 0.75rem; font-weight: 600;
+        }
+        .pf-body p { margin: 0 0 1.125rem; }
+        .pf-body strong { color: #1A4E5E; font-weight: 600; }
+        .pf-body em { color: #1F2937; }
+        .pf-body ul { margin: 0 0 1.125rem; padding: 0 0 0 1.6rem; }
+        .pf-body li { margin-bottom: 0.375rem; }
+        .pf-body code {
+            font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+            font-size: 0.9em; background: #F1EBE2; padding: 1px 6px; border-radius: 4px; color: #1A4E5E;
+        }
+
+        /* Abstract callout */
+        .pf-abstract {
+            background: #1A4E5E; color: #FAF6F0; border-radius: 12px;
+            padding: 1.75rem 2rem; margin: 0 0 2.5rem; position: relative;
+        }
+        .pf-abstract::before {
+            content: ''; position: absolute; top: 0; left: 2rem;
+            width: 36px; height: 3px; background: #E1701A; border-radius: 0 0 2px 2px;
+        }
+        .pf-abstract-label {
+            font-family: 'Inter', sans-serif; font-size: 0.6875rem; letter-spacing: 0.16em;
+            text-transform: uppercase; color: #F4A77A; font-weight: 700; margin-bottom: 0.75rem;
+        }
+        .pf-abstract p { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; line-height: 1.65; color: #FAF6F0; font-style: italic; }
+
+        /* ====== Preview / paywall ====== */
+        .paper-preview { position: relative; }
+        /* Fade the tail of the free preview into the cream bg (Medium-style) while locked */
+        .preview-fade {
+            position: absolute; left: 0; right: 0; bottom: 0; height: 180px;
+            background: linear-gradient(to bottom, rgba(250,246,240,0), #FAF6F0 88%);
+            pointer-events: none;
+        }
+        body.paper-unlocked .preview-fade { display: none; }
+
+        /* Locked rest of the article */
+        .paper-rest { display: none; }
+        body.paper-unlocked .paper-rest { display: block; }
+
+        .pf-closing { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid #E5E7EB; }
+        .pf-closing p { font-family: 'Source Serif 4', Georgia, serif; font-style: italic; color: #6B7280; font-size: 0.95rem; margin: 0 0 0.75rem; }
+
+        /* Lead form card (the paywall) */
+        body.paper-unlocked #request-paper { display: none; }
+        .lead-card {
+            background: #0F1A1E; color: white; border-radius: 1.5rem;
+            padding: 2.5rem 2.5rem 2rem; margin: 2rem 0 0; position: relative; overflow: hidden;
+        }
+        .lead-card::before {
+            content: ''; position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+            background-size: 28px 28px; opacity: 0.7; pointer-events: none;
+        }
+        .lead-card > * { position: relative; z-index: 1; }
+        .lead-card input, .lead-card select, .lead-card textarea {
+            width: 100%; font: inherit; font-family: 'Inter', sans-serif; font-size: 0.95rem;
+            padding: 0.75rem 1rem; border: 1px solid rgba(255,255,255,0.15); border-radius: 0.5rem;
+            background: rgba(255,255,255,0.04); color: white; transition: all 0.2s ease;
+        }
+        .lead-card input:focus, .lead-card select:focus, .lead-card textarea:focus {
+            outline: none; border-color: #E1701A; background: rgba(255,255,255,0.07); box-shadow: 0 0 0 3px rgba(225,112,26,0.18);
+        }
+        .lead-card input.input-error { border-color: #ff8a5a; background: rgba(255,138,90,0.08); }
+        .lead-card textarea { resize: vertical; min-height: 88px; }
+        .lead-card label {
+            display: flex; flex-direction: column; gap: 0.4rem; font-family: 'Inter', sans-serif;
+            font-size: 0.7rem; font-weight: 700; color: rgba(255,255,255,0.55); letter-spacing: 0.15em; text-transform: uppercase;
+        }
+        .lead-card select option { background: #1F2937; color: white; }
+        .lead-card .lead-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+        .lead-card .lead-form-grid > label.full { grid-column: 1 / -1; }
+        @media (max-width: 640px) { .lead-card .lead-form-grid { grid-template-columns: 1fr; } }
+        .lead-card button[type="submit"] {
+            grid-column: 1 / -1; background: #E1701A; color: white; font-family: 'Inter', sans-serif;
+            font-size: 0.7rem; font-weight: 800; letter-spacing: 0.2em; text-transform: uppercase;
+            padding: 1.05rem 1.25rem; border: 0; border-radius: 999px; cursor: pointer;
+            transition: all 0.25s ease; margin-top: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+        }
+        .lead-card button[type="submit"]:hover { background: white; color: #0F1A1E; transform: translateY(-1px); }
+        .lead-card button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
+        .lead-card .status { grid-column: 1 / -1; min-height: 18px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.7); }
+        .lead-card .status.err { color: #ff8a5a; }
+
+        /* Access bar (shown once unlocked, in place of the form) */
+        .access-bar { display: none; margin: 2rem 0 0; padding: 1rem 1.5rem; background: white;
+            border: 1px solid rgba(229,231,235,0.9); border-left: 3px solid #E1701A; border-radius: 0.75rem;
+            font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #1F2937; align-items: center; gap: 0.6rem; }
+        body.paper-unlocked .access-bar { display: flex; }
+        .access-bar .material-symbols-outlined { color: #E1701A; font-size: 1.2rem; }
+
+        /* Animations */
+        .animate-on-scroll {
+            opacity: 0; transform: translateY(16px);
+            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .animate-delay-1 { transition-delay: 0.06s; }
+    </style>
+</head>
+
+<body class="antialiased">
+    <!-- ============ NAV ============ -->
+    <nav class="fixed top-0 w-full z-50 backdrop-blur-xl bg-paper-cream/85 border-b border-slate-subtle/40">
+        <div class="max-w-[1600px] mx-auto px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="/" class="flex items-center gap-4 cursor-pointer">
+                    <div class="w-12 h-12 bg-primary flex items-center justify-center rounded-2xl rotate-3">
+                        <span class="material-symbols-outlined text-white text-2xl">shopping_cart_checkout</span>
+                    </div>
+                    <span class="font-display font-black text-3xl tracking-tighter text-text-main">coupr</span>
+                </a>
+                <div class="hidden lg:flex items-center space-x-12">
+                    <a class="text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.2em] uppercase font-sans" href="/#process">Experience</a>
+                    <a class="text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.2em] uppercase font-sans" href="/#mission">Mission</a>
+                    <a class="text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.2em] uppercase font-sans" href="/#retailer">Brands</a>
+                    <a class="text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.2em] uppercase font-sans" href="/#testimonials">Stories</a>
+                    <a class="text-xs font-bold tracking-[0.2em] uppercase nav-active font-sans" href="/report/">Research</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="/report/" class="hidden md:flex items-center gap-2 text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.15em] uppercase font-sans">
+                        <span class="material-symbols-outlined text-base">arrow_back</span>
+                        All Reports
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============ HERO ============ -->
+    <header class="relative pt-32 pb-12 overflow-hidden">
+        <div class="paper-grain"></div>
+        <div class="relative max-w-[1100px] mx-auto px-6 lg:px-8">
+            <div class="flex items-center gap-2 mb-10 text-xs font-bold text-text-muted tracking-[0.15em] uppercase font-sans animate-on-scroll">
+                <a href="/report/" class="hover:text-primary transition-colors">Research</a>
+                <span class="material-symbols-outlined text-base text-text-muted/50">chevron_right</span>
+                <span class="text-text-main">Methodology Paper</span>
+            </div>
+
+            <div class="grid lg:grid-cols-[1fr_280px] gap-12 items-end">
+                <div class="animate-on-scroll">
+                    <div class="inline-flex items-center gap-3 px-5 py-2 bg-primary/10 rounded-full mb-8">
+                        <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+                        <span class="text-[10px] font-black tracking-[0.3em] text-primary uppercase font-sans">Coupr Research · May 2026</span>
+                    </div>
+                    <h1 class="font-display font-bold text-text-main text-4xl sm:text-5xl lg:text-7xl leading-[0.95] tracking-tighter mb-6">Measuring the<br/><span class="text-primary italic">Consideration</span> Moment.</h1>
+                    <p class="font-serif italic text-xl lg:text-2xl text-text-muted leading-snug max-w-2xl">A new retail data primitive: closed-loop attribution from in-aisle engagement to register receipt.</p>
+                </div>
+
+                <aside class="border-t lg:border-t-0 lg:border-l border-slate-subtle/60 pt-8 lg:pt-2 lg:pl-8 font-sans animate-on-scroll animate-delay-1">
+                    <dl class="grid grid-cols-2 lg:grid-cols-1 gap-y-5 text-sm">
+                        <div>
+                            <dt class="text-[9px] font-black tracking-[0.25em] uppercase text-text-muted mb-1">Published</dt>
+                            <dd class="font-display font-bold text-text-main">May 2026</dd>
+                        </div>
+                        <div>
+                            <dt class="text-[9px] font-black tracking-[0.25em] uppercase text-text-muted mb-1">Type</dt>
+                            <dd class="font-display font-bold text-text-main">Methodology Paper</dd>
+                        </div>
+                        <div>
+                            <dt class="text-[9px] font-black tracking-[0.25em] uppercase text-text-muted mb-1">Location</dt>
+                            <dd class="font-display font-bold text-text-main">Miami, FL</dd>
+                        </div>
+                        <div>
+                            <dt class="text-[9px] font-black tracking-[0.25em] uppercase text-text-muted mb-1">Scope</dt>
+                            <dd class="font-display font-bold text-text-main">Single retailer</dd>
+                        </div>
+                    </dl>
+                </aside>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative pb-20">
+        <div class="max-w-[760px] mx-auto px-6 lg:px-8">
+
+            <!-- Stats -->
+            <section class="grid sm:grid-cols-2 gap-5 my-6 animate-on-scroll">
+                <div class="stat-card">
+                    <div class="stat-number">~41<span class="text-3xl align-top">%</span></div>
+                    <div class="font-sans text-xs text-text-muted mt-3 leading-relaxed">Larger basket by item count vs. pre-deployment baseline at the same retailer.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">~53<span class="text-3xl align-top">%</span></div>
+                    <div class="font-sans text-xs text-text-muted mt-3 leading-relaxed">Larger basket by dollar value vs. the same baseline.</div>
+                </div>
+            </section>
+
+            <p class="font-sans text-xs text-text-muted leading-relaxed mb-2 max-w-xl animate-on-scroll">
+                <span class="material-symbols-outlined text-sm align-middle text-primary mr-1">info</span>
+                Closed-loop, deterministic attribution from in-aisle engagement to register receipt — measured directly from receipts, joined on <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em; background:rgba(225,112,26,0.12); padding:1px 6px; border-radius:4px; color:#E1701A;">session_id</code>. No probabilistic stitching.
+            </p>
+
+            <!-- ===== FREE PREVIEW: abstract + section 1 (fades into the paywall while locked) ===== -->
+            <div class="paper-preview" id="paper-preview">
+                <aside class="pf-abstract">
+                    <div class="pf-abstract-label">Abstract</div>
+                    <p>At a regional grocery retailer in Florida, cart-mounted interactive screens designed to digitalize in-store shopper behavior via shopping tools have produced a measurement primitive we believe is novel at commercial scale: a deterministic, session-level link between in-aisle shopper engagement and the resulting register receipt. What this primitive reveals is a set of findings about in-store shopping that no panel projection or POS scan can produce at this granularity. Engaged shopping sessions average roughly twenty-eight minutes of in-store screen time and produce baskets that are approximately forty-one percent larger by item count and fifty-three percent larger by dollar value than the historical pre-deployment baseline at the same retailer. The methodology further enables brand-level basket-appearance attribution, regional market-cluster resolution, and category-level co-occurrence analytics — classes of insight that panel projections and POS data cannot produce at session granularity. This paper documents the methodology that produced these findings and lays out the implications for panel companies, retail media networks, identity-graph operators, and CPG analytics teams.</p>
+                </aside>
+
+                <div class="pf-body">
+                    <h2>1. The measurement gap</h2>
+                    <p>Three layers of data underpin most CPG and retail analytics today, with a fourth, contested layer emerging over the last decade.</p>
+                    <p><strong>Panel data</strong> (Circana, NielsenIQ, Numerator, dunnhumby) operates by sampling households, capturing their purchases, and projecting to a national or regional population. By design, panel data tells you what was bought across a sample, not what was considered at the moment of decision. Sample design carries selection error; projection introduces model variance. Panel data is the most widely-licensed measurement layer in CPG, but its central limitation has been understood since the discipline's origin: it sees outcomes, not decisions.</p>
+                    <p><strong>POS data</strong> sees what rang up at a register. It is the ground truth of purchase, but it knows nothing about what nearly happened — the comparison the shopper made before settling on one brand, the dietary filter applied that narrowed the choice set, the banner viewed that may or may not have influenced anything.</p>
+                    <p><strong>Loyalty data</strong> links household identifiers to purchase history. It is strong for understanding repeat behavior but weak for understanding why a particular purchase happened on a particular trip. Most loyalty programs see roughly half of total store volume; the rest is non-loyalty traffic that is invisible to the program.</p>
+                    <p><strong>Retail media measurement</strong> is the newest and most contested layer. Most retail media networks today rely on probabilistic matching to attribute exposure to outcome: cookies, location pings, exposure-to-outcome modeling. The most rigorous published evaluations of retail media attribution show error rates of thirty percent or higher relative to deterministic ground truth.</p>
+                    <p>What is absent across these four layers is a widely-deployed mechanism for capturing the <em>consideration moment</em> — the searches, comparisons, filters, and dwell time that precede a purchase decision — and linking it deterministically to actual outcomes. This paper documents one such mechanism, and reports the findings that have emerged from it.</p>
+                </div>
+
+                <div class="preview-fade" id="preview-fade"></div>
+            </div>
+
+            <!-- ===== PAYWALL FORM (hidden once unlocked) ===== -->
+            <section class="lead-card" id="request-paper">
+                <div class="flex items-start justify-between flex-wrap gap-4 mb-2">
+                    <div>
+                        <span class="text-[10px] font-black tracking-[0.3em] uppercase text-primary font-sans">Get the full paper</span>
+                        <h2 class="font-display font-bold text-white text-3xl lg:text-4xl tracking-tighter mt-2 leading-[1.05]">Send me the methodology paper.</h2>
+                    </div>
+                    <div class="flex items-center gap-2 px-3 py-1.5 bg-white/8 rounded-full text-[10px] font-bold tracking-widest uppercase text-white/60 font-sans">
+                        <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
+                        PDF
+                    </div>
+                </div>
+                <p class="text-white/65 font-sans text-sm leading-relaxed mb-7 max-w-xl">
+                    We'll send you the full paper — including the brand-attribution table, the banner attribution methodology, and the implications for panel companies, retail media networks, and identity-graph operators. No newsletter, no spam, no resale of contact details.
+                </p>
+
+                <form id="lead-form" class="lead-form-grid" novalidate>
+                    <label class="full">
+                        Name
+                        <input type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
+                    </label>
+                    <label>
+                        Work email
+                        <input type="email" name="email" required autocomplete="email" placeholder="jane@yourcompany.com" />
+                    </label>
+                    <label>
+                        Company
+                        <input type="text" name="company" required autocomplete="organization" placeholder="Acme Inc." />
+                    </label>
+                    <label class="full">
+                        Role / function (optional)
+                        <select name="role">
+                            <option value="">— select —</option>
+                            <option>Panel company</option>
+                            <option>Retail media network</option>
+                            <option>Location / mobility data provider</option>
+                            <option>Identity graph / DSP / CDP</option>
+                            <option>CPG brand</option>
+                            <option>Retailer</option>
+                            <option>Agency</option>
+                            <option>Investor / analyst</option>
+                            <option>Press / journalist</option>
+                            <option>Academic / other</option>
+                        </select>
+                    </label>
+                    <label class="full">
+                        What you'd most like to discuss (optional)
+                        <textarea name="note" rows="3" placeholder="Open-ended — we read everything."></textarea>
+                    </label>
+                    <button type="submit" id="submit-btn">
+                        Send me the paper
+                        <span class="material-symbols-outlined text-base">arrow_forward</span>
+                    </button>
+                    <div class="status" id="status" role="status" aria-live="polite"></div>
+                </form>
+            </section>
+
+            <!-- Access bar (shown once unlocked, in place of the form) -->
+            <div class="access-bar" id="access-bar">
+                <span class="material-symbols-outlined">verified</span>
+                <span>Reading the full paper as <strong id="access-email" class="font-semibold"></strong><span id="access-emailed"> — a copy is on its way to your inbox.</span></span>
+                <button onclick="signOutResearch()" class="ml-3 text-primary hover:underline font-bold font-sans text-xs uppercase tracking-wider" style="background:none;border:0;cursor:pointer;padding:0;">Sign out</button>
+            </div>
+
+            <!-- ===== LOCKED REST OF THE ARTICLE (revealed after the form / cookie) ===== -->
+            <article class="paper-rest" id="paper-rest">
+                <div class="pf-body">
+                    <h2>2. Findings at a glance</h2>
+                    <p>Five findings from the deployment, each a product of the closed-loop methodology documented in subsequent sections.</p>
+                    <p><strong>1. Engaged-session baskets run substantially larger than the pre-deployment baseline at the same retailer.</strong> Across the measurement window, baskets associated with Coupr-engaged sessions ran approximately forty-one percent larger by item count and fifty-three percent larger by dollar value than the historical baseline of comparable trips at the retailer prior to Coupr's deployment. This is the headline result of the deployment.</p>
+                    <p><strong>2. Engaged sessions are substantively longer than incidental cart use.</strong> The average engaged session — defined as a logged-in trip with three or more substantive interactions with the cart application — runs roughly twenty-eight minutes of in-store screen time. Approximately seventy percent of logged-in cart sessions cross the engagement threshold; the remaining thirty percent are logged-in but lower-interaction. The engagement population is a real shopping cohort, not a casual interaction cohort.</p>
+                    <p><strong>3. Brand-level basket attribution at session granularity, measured directly from receipts.</strong> The methodology produces deterministic brand-by-brand basket-appearance rates — the proportion of engaged shopping sessions containing at least one SKU from a given brand. These figures are not panel projections or modeled estimates; each is computed from the direct join of session event traces to register receipts. The capability extends across all brands present in the receipt stream, regardless of national share or branded-panel coverage.</p>
+                    <p><strong>4. Regional market dynamics and category-level shopping missions resolve at session granularity.</strong> Because the receipt stream captures every line item regardless of brand size or panel coverage, the methodology surfaces regional brand dynamics and category-level shopping missions that national panel projections cannot resolve. Specialty and regional brands, as well as private-label items, appear in the data with the same fidelity as national brands — a structural advantage over panel methodologies that are anchored to nationally sampled branded categories.</p>
+                    <p><strong>5. Cross-category co-occurrence patterns are actionable at session granularity.</strong> Because every receipt line item is linked to the full event trace of the shopping session that produced it, the methodology identifies which brands and categories appear together in the same basket and connects those co-occurrences to the in-aisle behaviors — searches, banner exposures, filter selections — that preceded them. This enables cross-aisle, cross-category activation planning that panel data cannot support.</p>
+                    <p>The methodology underlying these findings, the instrumentation taxonomy that produces the event data, and the limits and caveats of the comparisons used are documented in the sections that follow.</p>
+
+                    <h2>3. Method: closed-loop session-to-receipt linkage</h2>
+                    <p>The deployment that produced this paper's data consists of cart-mounted interactive touchscreens installed at a regional grocery retailer in Florida. The screens are integrated with the carts physically and run a custom application built and operated by Coupr. When a shopper engages with the screen — searching for a product, applying a dietary filter, viewing product details, tapping a banner, adding a shopping list, and/or asking contextual questions — the application captures the action as a structured event and emits it to a streaming pipeline.</p>
+                    <p>Each event carries a <em>session_id</em> that is generated when a shopper begins a trip and persists for the duration of that trip. At checkout, Coupr links the cart's <em>session_id</em> to the register's POS row, producing a deterministic mapping between the shopping session and the resulting receipt. This is the core methodological contribution of the system: every successfully linked Coupr-engaged session ties to a receipt at session granularity, and every Coupr-attributed receipt has a complete event trace from the cart screen.</p>
+                    <p>We use a specific definition of <em>engaged session</em> throughout this paper: a session in which the shopper authenticated at the cart by phone-number login and subsequently performed three or more substantive interactions with the cart application (a product search, a dietary or category filter, a product detail view, a banner tap, a wayfinding request, or any other tracked behavioral actions). Anonymous sessions — present in the cart but not logged in — exist as a separate stream and are not addressed in this paper. Empirically, engaged sessions average roughly twenty-eight minutes of in-store screen time, indicating substantive shopping rather than casual interaction. In the deployment data underlying this paper, approximately seventy percent of logged-in sessions meet the engagement threshold; the remaining thirty percent are logged-in but lower-interaction.</p>
+                    <p>The measurement window for the analysis underlying this paper spans Q4 2025 through Q1 2026. All session-level data is anonymized at publication. Phone numbers, where shoppers logged in, are hashed. No personally identifiable information appears in the data underlying this paper.</p>
+
+                    <h2>4. The instrumentation taxonomy</h2>
+                    <p>Most retail measurement systems instrument a small number of events: a purchase, perhaps a coupon redemption, sometimes a cart-add event in digital channels. The Coupr cart-screen application instruments more than thirty distinct shopper-behavioral event types, organized into four categories.</p>
+                    <p><strong>Search and query events</strong> capture explicit shopper intent — the searches, complete shopping list addition, comparisons, and product lookups a shopper performs at the cart screen. Variants distinguish between voice and text input, between exploratory queries and targeted product searches, and capture the downstream outcome of each search (product view, filter narrowing, basket addition).</p>
+                    <p><strong>Filter and navigation events</strong> capture how shoppers narrow their options. Dietary and category filters — gluten-free, high-protein, low-sugar, low-calorie, organic, vegan, discounted price — are captured along with the resulting product set the shopper engaged with. Aisle-level location changes and cart-led wayfinding (where a shopper asks the screen to guide them to a specific product) are tracked, allowing direct visualization of how a shopper traversed the store.</p>
+                    <p><strong>Engagement events</strong> capture interaction with content. Banner and advertising impressions and clicks are recorded along with the banner's brand, position, and aisle context. Product-detail views are captured with associated dwell time, with subordinate events tracking how deep into a product detail page a shopper read before navigating away.</p>
+                    <p><strong>Transactional and operational events</strong> capture downstream actions — item scanning by shopper, list-completion checkpoints, and application-layer signals that bear on data quality.</p>
+                    <p>For each event type, the application emits a structured payload carrying event-specific metadata: the dietary filter applied, the banner brand and creative position, the search query context, the aisle in which the event occurred. The payload schema is what makes the event stream useful as analytic input rather than just operational logging.</p>
+                    <p>This taxonomy is the product of more than a year of iteration. Each event was added because it captured a measurable behavior with implications for downstream analysis. The taxonomy itself — the choice of what to instrument, and the structured payload schema — represents a non-trivial piece of intellectual investment that we expect will continue to evolve as the deployment scales.</p>
+
+                    <h2>5. What the primitive enables: four demonstrations</h2>
+                    <p>The closed-loop session-to-receipt linkage is the methodological contribution. The instrumentation taxonomy is what makes the contribution useful. The demonstrations that follow illustrate the classes of signal the method produces — signal that is commercially distinguishable from what panel and POS data alone can show.</p>
+                    <h3>Demonstration 1: Brand-level attribution from receipts</h3>
+                    <p>Because every Coupr-engaged session links deterministically to a register receipt, the system produces a brand-by-brand basket-appearance rate for any brand present in the receipt stream: the proportion of engaged shopping sessions containing at least one SKU from that brand, computed directly from joined session and receipt records, with no panel projection or probabilistic modeling.</p>
+                    <p>This capability applies uniformly across the brand universe — national brands, regional specialty brands, and private-label items appear in the data with equal fidelity. Panel methodologies, which are anchored to nationally sampled branded categories, are structurally blind to regional brand dynamics and private-label penetration. The receipt stream captures every line item regardless of brand size or panel coverage, making the basket-appearance metric meaningfully broader than any panel-derived brand share.</p>
+                    <p>In the current single-retailer deployment, the composition of the brand-appearance distribution reflects the retailer's specific demographic context — a finding that is structural and stable, not incidental. As the deployment expands to multiple retailers in 2026, the brand-level attribution capability will generalize across retail contexts and enable cross-retailer comparison at session granularity.</p>
+                    <p>These rates are measured directly from receipts, not modeled. For panel companies, the basket-level brand-appearance metric is the kind of category-level signal that complements a panel projection — and at session-level granularity, with linked engagement traces, it is signal a panel cannot produce on its own.</p>
+                    <h3>Demonstration 2: Banner-to-basket attribution at session granularity</h3>
+                    <p>The methodological contribution is most visible in what we will call closed-loop banner attribution. For every banner served on a Coupr screen, the system captures:</p>
+                    <ul>
+                        <li>Which banner was served — by name, advertising brand, and creative URL.</li>
+                        <li>Which session viewed the banner — the anonymized <em>session_id</em>.</li>
+                        <li>Where the banner was viewed — aisle-level metadata captured from the geofence at the time of impression.</li>
+                        <li>When the banner was viewed — second-precision timestamp.</li>
+                        <li>When the banner was interacted with — <em>session_id</em> with aisle-level metadata.</li>
+                        <li>What happened next — the session continues; eventually a receipt is generated when the cart is scanned at checkout.</li>
+                    </ul>
+                    <p>The receipt, when produced, is matched 1:1 to the session via <em>session_id</em>, and the question "did the advertised brand appear in this session's basket" can be answered with deterministic evidence. This is not probabilistic matching, not modeled lift, not exposure-to-outcome inference. It is a direct measurement.</p>
+                    <p>A note on the operational scope of this demonstration: the banner program at Coupr is in active expansion. Per-brand banner-to-basket attribution from focused future deployments will be the subject of a follow-up paper. The point of this paper is to establish that the methodology exists and is operational at the infrastructure level.</p>
+                    <h3>Demonstration 3: Methodology validation through basket-size comparison</h3>
+                    <p>A side-effect finding offers methodological validation. Across the measurement window, baskets associated with Coupr-engaged sessions ran approximately 41% larger by item count and 53% higher in dollar value than the historical baseline of comparable trips at the same retailer prior to Coupr's deployment.</p>
+                    <p>A note on what "comparable" means here. The host retailer provided Coupr with a historical baseline drawn from pre-deployment transactions filtered to trips with comparable item-count profile in order to match the typical Coupr-engaged trip profile. The lift comparison is between the Coupr-engaged cohort during the deployment window and this fixed historical baseline. The baseline is fixed because Coupr does not see non-Coupr transactions during the deployment period — only transactions associated with sessions that linked to the cart system at checkout flow into Coupr's data pipeline.</p>
+                    <p>We present this finding as methodological validation rather than as a behavioral lift estimate, and we want to be unambiguous about its limits. The baseline is pre-deployment; the engaged cohort is post-deployment. Macro shifts in the retailer's category mix or basket trends over the same period are attributed to the deployment in this comparison, even when they may have occurred independently. The cohort definitions also differ in selection: the engaged cohort is a self-selected population (shoppers who chose to log in and engage), while the baseline is a population-level snapshot of all trips meeting the item-count filter. A randomized comparison against dedicated non-Coupr stores at the same retail chain will be possible once the deployment expands to multiple retailers in 2026. The directional finding — that Coupr-engaged trips run substantially larger than the pre-deployment baseline — is consistent with an engagement effect of the magnitudes reported. The precision will improve as multi-retailer rollout enables true randomized comparison.</p>
+                    <h3>Demonstration 4: Identity-graph extension into the in-aisle layer</h3>
+                    <p>Identity graphs — the commercial substrate that connects hashed emails, phone numbers, device IDs, and household identifiers across digital touchpoints — are the connective tissue of modern measurement. Companies including LiveRamp, Acxiom, TransUnion, and Epsilon operate identity graphs that link an audience identity across the open web, walled gardens, retailer loyalty programs, and increasingly across retail media networks. These graphs are the substrate on which most cross-channel attribution is built.</p>
+                    <p>What identity graphs do not currently reach is the in-aisle layer. Most graphs terminate at digital touchpoints — site visits, email opens, CTV exposures, programmatic impressions, online purchases. They do not extend into the moment of in-store decision, because no widely-deployed commercial system has produced a deterministic, identity-resolved data layer at that point in the shopper's trip. Loyalty card data closes part of this gap retroactively, but only for the subset of shoppers who are loyalty members and only at the post-purchase level. The decision moment itself remains outside the graph, where almost ninety percent of grocery sales happen: in-store.</p>
+                    <p>The Coupr deployment produces such a layer. When a shopper authenticates at the cart screen via phone number, the resulting hashed identifier serves as a deterministic identity node that can be joined to commercial identity graphs using standard cryptographic hashing. The session-level events that follow — searches, dietary filters, banner views, dwell time, navigation, etc. — become a new terminal in the graph: what the shopper considered, in real time, in the aisle.</p>
+                    <p>The methodological property that matters is deterministic, not probabilistic, identity. Identity graphs at commercial scale rely heavily on probabilistic matching, with attendant error rates that degrade attribution downstream. Authenticated, phone-confirmed nodes are higher quality. Adding even a modest volume of such deterministic nodes improves the resolution of the entire graph — a property identity graph operators recognize and price into their commercial structures.</p>
+                    <p>The resulting closed loop — from upstream digital advertising exposure, through identity resolution, through in-aisle behavior, to receipt — is a measurement chain that no currently-deployed commercial system can produce. Specific integration paths into established identity graphs are addressable as partnership conversations.</p>
+                    <h3>Demonstration 5: Co-occurrence patterns and shopping missions</h3>
+                    <p>The deterministic basket-level data captured at the receipt makes a distinct class of analytic possible: not just which brands appear in a session's basket, but which brands appear together, and which baskets are shaped by which shopping missions.</p>
+                    <p>Because co-occurrence is computed at the session level — with a complete event trace attached to every receipt — the analysis can identify not only which brands cluster in the same basket, but which in-aisle behaviors preceded that clustering. A banner served in one aisle can be connected to a purchase made in another; a dietary filter applied at one point in the trip can be linked to the brand ultimately selected several aisles later. This is the kind of cross-category, cross-aisle signal that panel data cannot support, because panel data has no event trace — only the final basket.</p>
+                    <p>The commercial implication is direct: cross-aisle, cross-category cross-promotion planning becomes actionable at session granularity. Brands whose shoppers co-purchase from other categories — identifiable from the basket data — can target those co-purchase relationships with aisle-specific banners, knowing that the shopper's basket profile has been documented in another part of the store.</p>
+                    <p>The co-occurrence capability extends to regional shopping missions: categories that cluster together in local markets, reflecting regional preferences and shopping habits, resolve to coherent basket profiles that national panel data cannot surface at session granularity. Per-brand and per-mission co-occurrence patterns will be the subject of a follow-up paper specifically targeted at shopper-marketing and category-management practice.</p>
+
+                    <h2>6. Implications</h2>
+                    <p>The capabilities described in Section 5 have different implications for different categories of reader. We address four audiences briefly.</p>
+                    <p><strong>For panel companies</strong> (Circana, NielsenIQ, Numerator, dunnhumby, Kantar): Coupr's data represents a complementary signal layer. Where panel data tells you what was bought, the events captured at the cart screen tell you what was considered in the moments before. The two together close a measurement gap that has persisted in CPG analytics for two decades. The most natural commercial structure is a data licensing or panel-augmentation agreement, with joint research as a parallel possibility.</p>
+                    <p><strong>For retail media networks</strong> (Kroger Precision Marketing, Walmart Connect, Target Roundel, Albertsons Media Collective, Instacart Ads): Coupr's deterministic banner-to-basket attribution is the methodology that retail media has needed but lacked at scale. RMNs that integrate this signal layer into their measurement stack can offer their CPG advertising customers attribution that does not depend on probabilistic modeling. The methodological advantage is large enough that we believe it justifies a strategic conversation between Coupr and any RMN building out next-generation measurement infrastructure.</p>
+                    <p><strong>For location and mobility data providers</strong> (Placer.ai, SafeGraph, Foursquare, Cuebiq): Visit data tells you where shoppers go. Coupr's data tells you what shoppers do once they are inside. The two layers are complementary and largely non-overlapping. Joint products incorporating both layers — a unified visit-to-consideration-to-purchase view — would be uniquely positioned in the market and difficult for any competitor to replicate independently.</p>
+                    <p><strong>For data platforms and demand-side platforms</strong> (LiveRamp, The Trade Desk, Acxiom, Epsilon): the identity-graph integration described in Demonstration 4 is the most direct commercial fit. Beyond the identity layer itself, Coupr's session-level events are ingestible as behavioral data inputs, with deterministic resolution that improves attribution quality downstream of any campaign exposure already tracked elsewhere in the graph.</p>
+                    <p>In all four cases, the most valuable structure is partnership rather than transactional data sale. The dataset's distinctive value lies in its methodology and instrumentation taxonomy, both of which benefit from continued joint investment.</p>
+
+                    <h2>7. Methodology choices</h2>
+                    <p>A note on what this paper does and does not address.</p>
+                    <p><strong>Geographic scope.</strong> The analysis underlying this paper is anchored in a Florida market with a distinct regional demographic context. Behavioral patterns observed here may not generalize uniformly to other regional contexts. Future expansion of the deployment will progressively address this concern.</p>
+                    <p><strong>Retailer scope.</strong> The current deployment is single-retailer. Category mix, store layout, and shopper demographics specific to the host retailer shape the behavioral signal captured. Multi-retailer expansion is planned for 2026.</p>
+                    <p><strong>Replacement vs. complement.</strong> This paper makes no claim that the dataset replaces panel measurement. It complements it. Panel data and Coupr's session-level data answer different research questions, with different sample structures, different statistical assumptions, and different commercial economics. Both are useful; neither is a substitute for the other.</p>
+                    <p><strong>The baseline comparison in Demonstration 3.</strong> The lift figures reported are computed against a pre-deployment historical baseline at the same retailer rather than against a randomized control. The retailer provided Coupr with a baseline drawn from a multi-quarter pre-deployment transaction set, filtered to trips meeting an item-count floor that matches the typical engaged-session profile. The comparison is honest about what it is — a before-and-after at the same retailer — but it is not a clean randomized-control lift estimate. Macro shifts in category mix or basket trends over the deployment window are attributed to the deployment in this comparison even when they may have occurred independently. A multi-retailer rollout in 2026 will support a randomized comparison against dedicated non-Coupr stores at the same retail chain, which is the methodology that produces a fully defensible lift number. The directional finding — that engaged trips run substantially larger than the pre-deployment baseline — is consistent with an engagement effect of the magnitudes reported.</p>
+                    <p>These notes are offered in the interest of methodological transparency. They do not change the central claim of this paper — that the closed-loop session-to-receipt linkage is operational and produces measurable signal.</p>
+
+                    <h2>8. Forward research and partnership paths</h2>
+                    <p>Coupr Research is organized around three workstreams in 2026.</p>
+                    <p><strong>Multi-retailer expansion.</strong> The deployment is currently single-retailer, operating at a regional grocery chain in Florida. We are in active conversations with additional grocery and specialty-retail chains regarding deployments at their stores in 2026. Each new retailer adds heterogeneity to the dataset and improves the generalizability of subsequent papers.</p>
+                    <p><strong>Deeper instrumentation.</strong> Several event types currently captured at limited fidelity — voice-search queries, augmented checkout flows, comparison-event traces — are scheduled for deeper instrumentation in mid-2026. Subsequent papers will incorporate these signals.</p>
+                    <p><strong>Joint research program.</strong> Coupr Research is open to collaborative studies with panel companies, retail media networks, location data providers, and academic institutions. Representative formats include co-authored research papers, sponsored insight briefs, and panel-augmentation studies. Inquiries can be directed to hello@coupr.io.</p>
+                    <p>For organizations interested in deeper engagement with Coupr Research, the appropriate path varies by audience. Panel companies, retail media networks, identity-graph operators, and data platforms are invited to explore partnership conversations directly. Inquiries can be directed to research@coupr.io.</p>
+
+                    <h2>9. Methodology appendix</h2>
+                    <p>For technical readers, the following details supplement the main text.</p>
+                    <p><strong>Event stream.</strong> The principal event stream is structured as one record per shopper action, with each record carrying a session identifier, an event type, an event-specific payload, and the contextual metadata (device, tenant, timestamp, position) needed for downstream joining and analysis.</p>
+                    <p><strong>POS stream.</strong> Receipt-level data is structured as one record per line item with the parent transaction identifier; each transaction record carries the cart session identifier that links it to the corresponding event trace. The session identifier is the join key between the event stream and the receipt stream.</p>
+                    <p><strong>The session-to-receipt join.</strong> The deterministic 1:1 link between a Coupr-engaged session and its register receipt is implemented as an INNER JOIN on <em>session_id</em> between the events warehouse and the POS warehouse. The join match rate is high.</p>
+                    <p><strong>Privacy considerations.</strong> Session-level events do not contain PII at the analytical layer. Phone numbers, captured at login when shoppers explicitly identify themselves, are hashed. Receipt-level data is mediated through the retail host's existing privacy infrastructure. The dataset complies with reasonable retail data-handling standards. No data underlying this paper has been or will be published in a form that could re-identify individual shoppers.</p>
+                    <p><strong>Data integrity validation.</strong> Event delivery rate from cart device to data warehouse is high. Event schema validation passes at the Lambda layer; failed events are routed to a dead-letter queue for engineering review.</p>
+                </div>
+
+                <div class="pf-closing">
+                    <p>Coupr Research is the research arm of Coupr, an in-store data platform operating cart-mounted interactive screens at grocery retail locations. For inquiries: <a href="mailto:research@coupr.io" style="color:#E1701A;">research@coupr.io</a></p>
+                    <p>This paper, including all figures, may be cited freely with attribution. Coupr Research welcomes corrections, methodological critique, and partnership inquiries.</p>
+                    <p>Miami, Florida · May 2026 · Coupr Research · coupr.io/report · research@coupr.io</p>
+                </div>
+            </article>
+
+        </div>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="bg-pure-white border-t border-slate-subtle/30 py-20 mt-20">
+        <div class="max-w-[1600px] mx-auto px-8">
+            <div class="grid lg:grid-cols-12 gap-16 mb-16">
+                <div class="lg:col-span-5">
+                    <a href="/" class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-primary flex items-center justify-center rounded-2xl rotate-3">
+                            <span class="material-symbols-outlined text-white">shopping_cart_checkout</span>
+                        </div>
+                        <span class="font-display font-black text-4xl tracking-tighter text-text-main">coupr</span>
+                    </a>
+                    <p class="font-sans text-text-muted text-lg max-w-md leading-relaxed font-light">
+                        Transforming retail with AI-powered smart carts that understand your needs.
+                    </p>
+                </div>
+                <div class="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12 font-sans">
+                    <div>
+                        <h4 class="font-black text-text-main text-[10px] uppercase tracking-[0.4em] mb-10">Product</h4>
+                        <ul class="space-y-6 text-sm text-text-muted font-bold tracking-widest uppercase">
+                            <li><a class="hover:text-primary transition-colors" href="/#process">Experience</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="/#retailer">Brands Program</a></li>
+                            <li><a class="hover:text-primary transition-colors text-primary" href="/report/">Research</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-text-main text-[10px] uppercase tracking-[0.4em] mb-10">Company</h4>
+                        <ul class="space-y-6 text-sm text-text-muted font-bold tracking-widest uppercase">
+                            <li><a class="hover:text-primary transition-colors" href="/#mission">Mission</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="/#testimonials">Stories</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-black text-text-main text-[10px] uppercase tracking-[0.4em] mb-10">Contact</h4>
+                        <ul class="space-y-6 text-sm text-text-muted font-bold tracking-widest uppercase">
+                            <li>hello@coupr.io</li>
+                            <li>(1) 857 498 0040</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-10 border-t border-slate-subtle/30 flex flex-col md:flex-row justify-between items-center gap-6 font-sans">
+                <div class="text-[10px] text-text-muted font-black tracking-[0.3em] uppercase">© 2026 Coupr Inc. — Engineered for Excellence</div>
+                <div class="flex items-center gap-6">
+                    <a href="https://coupr-web.web.app/privacy_policy" target="_blank" class="text-[10px] text-text-muted font-black tracking-[0.3em] uppercase hover:text-primary transition-colors">Privacy Policy</a>
+                    <a href="https://coupr-web.web.app/terms_conditions" target="_blank" class="text-[10px] text-text-muted font-black tracking-[0.3em] uppercase hover:text-primary transition-colors">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============ SCRIPTS ============ -->
+    <script>
+        const CONTACT_ENDPOINT = 'https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact';
+        const STORAGE_KEY = 'coupr_research_email';
+        const PAPER_ID = 'consideration-moment';
+        const UNLOCK_FLAG = 'coupr_paper_unlocked_' + PAPER_ID;
+
+        // ---- GA4 helpers — user_id = sha256(email) (never raw PII to Google) ----
+        function gaEvent(name, params) { if (window.gtag) gtag('event', name, params || {}); }
+        async function gaIdentify(email) {
+            try {
+                if (!email || !window.gtag || !window.crypto || !crypto.subtle) return;
+                const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(email.trim().toLowerCase()));
+                const hash = [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, '0')).join('');
+                gtag('set', { user_id: hash });
+            } catch (e) {}
+        }
+
+        const BLOCKED_DOMAINS = new Set([
+            'gmail.com', 'googlemail.com',
+            'hotmail.com', 'hotmail.co.uk', 'hotmail.fr', 'hotmail.es', 'hotmail.it', 'hotmail.de',
+            'outlook.com', 'outlook.es', 'outlook.fr', 'outlook.it', 'outlook.de', 'outlook.co.uk',
+            'live.com', 'live.co.uk', 'live.fr', 'msn.com', 'live.ca', 'live.com.mx', 'live.cl',
+            'yahoo.com', 'yahoo.es', 'yahoo.co.uk', 'yahoo.fr', 'yahoo.de', 'yahoo.it',
+            'yahoo.com.mx', 'yahoo.com.ar', 'yahoo.com.br', 'ymail.com', 'rocketmail.com',
+            'icloud.com', 'me.com', 'mac.com',
+            'aol.com', 'protonmail.com', 'proton.me', 'pm.me',
+            'gmx.com', 'gmx.net', 'gmx.de', 'gmx.es',
+            'mail.com', 'zoho.com', 'yandex.com', 'yandex.ru', 'mail.ru', 'inbox.ru',
+            'tutanota.com', 'fastmail.com',
+            'qq.com', '163.com', '126.com',
+            'naver.com', 'daum.net',
+            'web.de', 't-online.de',
+            'libero.it', 'virgilio.it',
+            'orange.fr', 'wanadoo.fr', 'laposte.net', 'sfr.fr', 'free.fr',
+            'terra.com', 'terra.com.br', 'terra.com.mx', 'bol.com.br', 'uol.com.br',
+            'prodigy.net.mx', 'rediffmail.com', 'duck.com'
+        ]);
+
+        function isCorporateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!re.test(email)) return { ok: false, reason: 'format' };
+            const domain = email.split('@')[1].trim().toLowerCase();
+            if (BLOCKED_DOMAINS.has(domain)) return { ok: false, reason: 'blocked', domain };
+            return { ok: true, domain };
+        }
+
+        const form = document.getElementById('lead-form');
+        const status = document.getElementById('status');
+
+        // Unlock: reveal the rest of the article + swap the form for the access bar.
+        function unlockPaper(email, opts) {
+            opts = opts || {};
+            document.getElementById('access-email').textContent = email;
+            document.getElementById('access-emailed').style.display = opts.emailed ? 'inline' : 'none';
+            document.body.classList.add('paper-unlocked');
+            if (opts.scroll) {
+                setTimeout(function () {
+                    document.getElementById('paper-rest').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 120);
+            }
+        }
+
+        // Returning visitor: if they already submitted (cookie/localStorage), skip
+        // the paywall entirely and show the full article.
+        (function checkExistingAccess() {
+            gaEvent('view_paper_preview', { paper_id: PAPER_ID });
+            try {
+                const unlocked = localStorage.getItem(UNLOCK_FLAG);
+                const saved = localStorage.getItem(STORAGE_KEY) || '';
+                if (unlocked) {
+                    unlockPaper(saved, { emailed: false, scroll: false });
+                    if (saved) gaIdentify(saved);
+                    gaEvent('paper_unlocked', { paper_id: PAPER_ID, via: 'returning' });
+                } else {
+                    // Funnel: fire when the paywall form scrolls into view.
+                    const pw = document.getElementById('request-paper');
+                    if (pw && 'IntersectionObserver' in window) {
+                        let seen = false;
+                        const pwObs = new IntersectionObserver((entries) => {
+                            entries.forEach((en) => {
+                                if (en.isIntersecting && !seen) { seen = true; gaEvent('view_paper_paywall', { paper_id: PAPER_ID }); }
+                            });
+                        }, { threshold: 0.3 });
+                        pwObs.observe(pw);
+                    }
+                }
+            } catch (e) {}
+        })();
+
+        ['name', 'email', 'company'].forEach(function (n) {
+            if (form[n]) form[n].addEventListener('input', function () { form[n].classList.remove('input-error'); status.textContent = ''; status.className = 'status'; });
+        });
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            status.className = 'status';
+            status.textContent = '';
+
+            const data = {
+                form_type: 'research-paper-request',
+                paper_id: PAPER_ID,
+                name: form.name.value.trim(),
+                email: form.email.value.trim(),
+                company: form.company.value.trim(),
+                role: form.role.value,
+                note: form.note.value.trim(),
+                source: 'coupr.io/report/consideration-moment',
+                ts: new Date().toISOString()
+            };
+
+            ['name', 'email', 'company'].forEach(function (n) { form[n].classList.remove('input-error'); });
+            if (!data.name || !data.email || !data.company) {
+                ['name', 'email', 'company'].forEach(function (n) { if (!form[n].value.trim()) form[n].classList.add('input-error'); });
+                status.className = 'status err';
+                status.textContent = 'Name, work email, and company are required.';
+                return;
+            }
+            const check = isCorporateEmail(data.email.toLowerCase());
+            if (!check.ok) {
+                form.email.classList.add('input-error');
+                status.className = 'status err';
+                status.textContent = check.reason === 'blocked'
+                    ? "Please use your corporate email (" + check.domain + " isn't accepted)."
+                    : 'Please enter a valid email address.';
+                return;
+            }
+
+            // Remember (cookie/localStorage) so we never show the paywall again,
+            // reveal the full article inline, and email the PDF copy in the background.
+            try {
+                localStorage.setItem(STORAGE_KEY, data.email);
+                localStorage.setItem(UNLOCK_FLAG, '1');
+            } catch (e) {}
+            unlockPaper(data.email, { emailed: true, scroll: true });
+
+            gaIdentify(data.email).then(function () {
+                gaEvent('generate_lead', { paper_id: PAPER_ID, method: 'paywall_form' });
+                gaEvent('paper_unlocked', { paper_id: PAPER_ID, via: 'form' });
+            });
+
+            fetch(CONTACT_ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            }).catch(function (err) { console.warn('paper email copy failed (inline already shown)', err); });
+        });
+
+        function signOutResearch() {
+            try { localStorage.removeItem(STORAGE_KEY); localStorage.removeItem(UNLOCK_FLAG); } catch (e) {}
+            window.location.reload();
+        }
+
+        // ============ SCROLL ANIMATIONS ============
+        const obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) { if (entry.isIntersecting) entry.target.classList.add('is-visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(function (el) { obs.observe(el); });
+    </script>
+</body>
+
+</html>

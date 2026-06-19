@@ -18,11 +18,24 @@ resource "aws_cloudfront_origin_access_control" "static_site" {
   signing_protocol                  = "sigv4"
 }
 
+# Rewrites:
+#   /foo/   -> /foo/index.html
+#   /foo    -> /foo.html
+# Needed because S3 OAC sigv4 origin does not auto-index subdirectories,
+# and we want clean URLs (no trailing .html) under /report/.
+resource "aws_cloudfront_function" "url_rewrite" {
+  name    = "${var.project_name}-url-rewrite"
+  runtime = "cloudfront-js-2.0"
+  comment = "Clean URL rewrite for static site"
+  publish = true
+  code    = file("${path.module}/cloudfront-function.js")
+}
+
 resource "aws_cloudfront_distribution" "static_site" {
   enabled             = true
   default_root_object = "index.html"
   comment             = "${var.project_name} landing page"
-  aliases = ["coupr.io", "www.coupr.io"]
+  aliases             = ["coupr.io", "www.coupr.io"]
 
   origin {
     domain_name              = aws_s3_bucket.static_site.bucket_regional_domain_name
@@ -42,6 +55,11 @@ resource "aws_cloudfront_distribution" "static_site" {
       cookies {
         forward = "none"
       }
+    }
+
+    function_association {
+      event_type   = "viewer-request"
+      function_arn = aws_cloudfront_function.url_rewrite.arn
     }
 
     min_ttl     = 0

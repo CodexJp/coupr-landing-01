@@ -404,6 +404,8 @@
                         href="#retailer">Brands</a>
                     <a class="text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.2em] uppercase"
                         href="#testimonials">Stories</a>
+                    <a class="text-xs font-bold text-text-muted hover:text-primary transition-colors tracking-[0.2em] uppercase"
+                        href="/report/">Research<span class="ml-2 px-2 py-0.5 bg-primary/10 text-primary text-[8px] font-black tracking-widest uppercase rounded">New</span></a>
                 </div>
                 <div class="flex items-center gap-4">
                     <button onclick="openModal()"
@@ -898,6 +900,7 @@
                         <ul class="space-y-6 text-sm text-text-muted font-bold tracking-widest uppercase">
                             <li><a class="hover:text-primary transition-colors" href="#process">Experience</a></li>
                             <li><a class="hover:text-primary transition-colors" href="#retailer">Brands Program</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="/report/">Research</a></li>
                         </ul>
                     </div>
                     <div>
@@ -1155,7 +1158,7 @@
         });
 
         // Contact form endpoint — update after terraform apply
-        const CONTACT_ENDPOINT = 'https://s04r3s9ik7.execute-api.us-east-1.amazonaws.com/contact';
+        const CONTACT_ENDPOINT = 'https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact';
 
         // Form submission
         document.getElementById('demoForm').addEventListener('submit', async function(e) {
