@@ -205,13 +205,71 @@
         .lead-card button:disabled { opacity: 0.55; cursor: not-allowed; transform: none !important; }
         .lead-card .status { grid-column: 1 / -1; min-height: 18px; font-family: 'Inter', sans-serif; font-size: 0.8rem; color: rgba(255,255,255,0.7); }
         .lead-card .status.err { color: #ff8a5a; }
+        /* Inline per-field error (shown right under the email input) */
+        .lead-card .field-error {
+            display: none;
+            align-items: center;
+            gap: 0.35rem;
+            margin-top: 0.45rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0;
+            text-transform: none;
+            color: #ff8a5a;
+        }
+        .lead-card .field-error.show { display: flex; }
+        .lead-card .field-error .material-symbols-outlined { font-size: 1rem; }
 
-        /* Access bar (shown once unlocked, in place of the form) */
-        .access-bar { display: none; margin: 2rem 0 0; padding: 1rem 1.5rem; background: white;
-            border: 1px solid rgba(229,231,235,0.9); border-left: 3px solid #E1701A; border-radius: 0.75rem;
-            font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #1F2937; align-items: center; gap: 0.6rem; }
-        body.paper-unlocked .access-bar { display: flex; }
-        .access-bar .material-symbols-outlined { color: #E1701A; font-size: 1.2rem; }
+        /* Access pill in the report header (shown once unlocked) */
+        .header-access {
+            display: none; align-items: center; gap: 0.55rem;
+            padding: 0.4rem 0.4rem 0.4rem 0.9rem; background: white;
+            border: 1px solid rgba(229,231,235,0.9); border-radius: 999px;
+            font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #1F2937;
+            box-shadow: 0 6px 18px -10px rgba(0,0,0,0.22); white-space: nowrap;
+        }
+        body.paper-unlocked .header-access { display: inline-flex; }
+        .header-access .material-symbols-outlined { color: #E1701A; font-size: 1.05rem; }
+        .header-access .ha-label { color: #6B7280; }
+        .header-access .ha-email { font-weight: 600; color: #1A4E5E; }
+        .header-access .ha-signout {
+            background: #E1701A; color: white; border: 0; cursor: pointer;
+            font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 800;
+            letter-spacing: 0.12em; text-transform: uppercase;
+            padding: 0.45rem 0.85rem; border-radius: 999px; transition: all 0.2s ease;
+        }
+        .header-access .ha-signout:hover { background: #1A4E5E; }
+        @media (max-width: 560px) { .header-access .ha-label, .header-access .ha-email { display: none; } }
+
+        /* ====== Success modal (confirmation that the paper is on its way) ====== */
+        .paper-modal { display: none; position: fixed; inset: 0; z-index: 100; align-items: center; justify-content: center; padding: 1.5rem; }
+        .paper-modal.show { display: flex; }
+        .paper-modal-backdrop { position: absolute; inset: 0; background: rgba(15,26,30,0.55); backdrop-filter: blur(4px); animation: pm-fade 0.25s ease; }
+        .paper-modal-card {
+            position: relative; z-index: 1; width: 100%; max-width: 460px; background: #FAF6F0;
+            border-radius: 1.5rem; padding: 2.75rem 2.5rem 2rem; text-align: center;
+            box-shadow: 0 30px 80px -20px rgba(0,0,0,0.4); border: 1px solid rgba(229,231,235,0.8);
+            animation: pm-pop 0.3s cubic-bezier(0.16,1,0.3,1);
+        }
+        .paper-modal-icon {
+            width: 64px; height: 64px; margin: 0 auto 1.25rem; border-radius: 50%;
+            background: rgba(225,112,26,0.12); display: flex; align-items: center; justify-content: center;
+        }
+        .paper-modal-icon .material-symbols-outlined { color: #E1701A; font-size: 2rem; }
+        .paper-modal-eyebrow { font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 800; letter-spacing: 0.25em; text-transform: uppercase; color: #E1701A; }
+        .paper-modal-card h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 1.85rem; letter-spacing: -0.02em; color: #1F2937; margin: 0.75rem 0 0.85rem; line-height: 1.1; }
+        .paper-modal-card p { font-family: 'Source Serif 4', Georgia, serif; font-size: 1rem; line-height: 1.6; color: #4b5563; margin: 0 0 1.5rem; }
+        .paper-modal-card p strong { color: #1A4E5E; font-weight: 600; }
+        .paper-modal-btn {
+            display: inline-flex; align-items: center; gap: 0.55rem; background: #E1701A; color: white; border: 0; cursor: pointer;
+            font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase;
+            padding: 1rem 2rem; border-radius: 999px; transition: all 0.25s ease;
+        }
+        .paper-modal-btn:hover { background: #1A4E5E; transform: translateY(-1px); }
+        .paper-modal-fine { font-family: 'Inter', sans-serif !important; font-size: 0.7rem !important; color: #9ca3af !important; margin: 1rem 0 0 !important; font-style: normal !important; }
+        @keyframes pm-fade { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes pm-pop { from { opacity: 0; transform: translateY(12px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
 
         /* Animations */
         .animate-on-scroll {
@@ -255,10 +313,18 @@
     <header class="relative pt-32 pb-12 overflow-hidden">
         <div class="paper-grain"></div>
         <div class="relative max-w-[1100px] mx-auto px-6 lg:px-8">
-            <div class="flex items-center gap-2 mb-10 text-xs font-bold text-text-muted tracking-[0.15em] uppercase font-sans animate-on-scroll">
-                <a href="/report/" class="hover:text-primary transition-colors">Research</a>
-                <span class="material-symbols-outlined text-base text-text-muted/50">chevron_right</span>
-                <span class="text-text-main">Methodology Paper</span>
+            <div class="flex items-center justify-between gap-3 mb-10 animate-on-scroll">
+                <div class="flex items-center gap-2 text-xs font-bold text-text-muted tracking-[0.15em] uppercase font-sans">
+                    <a href="/report/" class="hover:text-primary transition-colors">Research</a>
+                    <span class="material-symbols-outlined text-base text-text-muted/50">chevron_right</span>
+                    <span class="text-text-main">Methodology Paper</span>
+                </div>
+                <div class="header-access" id="header-access">
+                    <span class="material-symbols-outlined">verified</span>
+                    <span class="ha-label">Reading as</span>
+                    <span class="ha-email" id="access-email"></span>
+                    <button class="ha-signout" onclick="signOutResearch()">Sign out</button>
+                </div>
             </div>
 
             <div class="grid lg:grid-cols-[1fr_280px] gap-12 items-end">
@@ -301,11 +367,11 @@
             <!-- Stats -->
             <section class="grid sm:grid-cols-2 gap-5 my-6 animate-on-scroll">
                 <div class="stat-card">
-                    <div class="stat-number">~41<span class="text-3xl align-top">%</span></div>
+                    <div class="stat-number">~35<span class="text-3xl align-top">%</span></div>
                     <div class="font-sans text-xs text-text-muted mt-3 leading-relaxed">Larger basket by item count vs. pre-deployment baseline at the same retailer.</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-number">~53<span class="text-3xl align-top">%</span></div>
+                    <div class="stat-number">~46<span class="text-3xl align-top">%</span></div>
                     <div class="font-sans text-xs text-text-muted mt-3 leading-relaxed">Larger basket by dollar value vs. the same baseline.</div>
                 </div>
             </section>
@@ -319,7 +385,7 @@
             <div class="paper-preview" id="paper-preview">
                 <aside class="pf-abstract">
                     <div class="pf-abstract-label">Abstract</div>
-                    <p>At a regional grocery retailer in Florida, cart-mounted interactive screens designed to digitalize in-store shopper behavior via shopping tools have produced a measurement primitive we believe is novel at commercial scale: a deterministic, session-level link between in-aisle shopper engagement and the resulting register receipt. What this primitive reveals is a set of findings about in-store shopping that no panel projection or POS scan can produce at this granularity. Engaged shopping sessions average roughly twenty-eight minutes of in-store screen time and produce baskets that are approximately forty-one percent larger by item count and fifty-three percent larger by dollar value than the historical pre-deployment baseline at the same retailer. The methodology further enables brand-level basket-appearance attribution, regional market-cluster resolution, and category-level co-occurrence analytics — classes of insight that panel projections and POS data cannot produce at session granularity. This paper documents the methodology that produced these findings and lays out the implications for panel companies, retail media networks, identity-graph operators, and CPG analytics teams.</p>
+                    <p>At a regional grocery retailer in Florida, cart-mounted interactive screens designed to digitalize in-store shopper behavior via shopping tools have produced a measurement primitive we believe is novel at commercial scale: a deterministic, session-level link between in-aisle shopper engagement and the resulting register receipt. What this primitive reveals is a set of findings about in-store shopping that no panel projection or POS scan can produce at this granularity. Engaged shopping sessions average roughly twenty-eight minutes of in-store screen time and produce baskets that are approximately thirty-five percent larger by item count and forty-six percent larger by dollar value than the historical pre-deployment baseline at the same retailer (figures reflect the Q2 2026 quarterly update; see the Addendum). The methodology further enables brand-level basket-appearance attribution, regional market-cluster resolution, and category-level co-occurrence analytics — classes of insight that panel projections and POS data cannot produce at session granularity. This paper documents the methodology that produced these findings and lays out the implications for panel companies, retail media networks, identity-graph operators, and CPG analytics teams.</p>
                 </aside>
 
                 <div class="pf-body">
@@ -340,7 +406,7 @@
                 <div class="flex items-start justify-between flex-wrap gap-4 mb-2">
                     <div>
                         <span class="text-[10px] font-black tracking-[0.3em] uppercase text-primary font-sans">Get the full paper</span>
-                        <h2 class="font-display font-bold text-white text-3xl lg:text-4xl tracking-tighter mt-2 leading-[1.05]">Send me the methodology paper.</h2>
+                        <h2 class="font-display font-bold text-white text-3xl lg:text-4xl tracking-tighter mt-2 leading-[1.05]">Access the methodology paper.</h2>
                     </div>
                     <div class="flex items-center gap-2 px-3 py-1.5 bg-white/8 rounded-full text-[10px] font-bold tracking-widest uppercase text-white/60 font-sans">
                         <span class="material-symbols-outlined text-sm">picture_as_pdf</span>
@@ -359,6 +425,10 @@
                     <label>
                         Work email
                         <input type="email" name="email" required autocomplete="email" placeholder="jane@yourcompany.com" />
+                        <span class="field-error" id="email-error">
+                            <span class="material-symbols-outlined">error</span>
+                            <span id="email-error-text"></span>
+                        </span>
                     </label>
                     <label>
                         Company
@@ -385,26 +455,19 @@
                         <textarea name="note" rows="3" placeholder="Open-ended — we read everything."></textarea>
                     </label>
                     <button type="submit" id="submit-btn">
-                        Send me the paper
+                        Email me the paper
                         <span class="material-symbols-outlined text-base">arrow_forward</span>
                     </button>
                     <div class="status" id="status" role="status" aria-live="polite"></div>
                 </form>
             </section>
 
-            <!-- Access bar (shown once unlocked, in place of the form) -->
-            <div class="access-bar" id="access-bar">
-                <span class="material-symbols-outlined">verified</span>
-                <span>Reading the full paper as <strong id="access-email" class="font-semibold"></strong><span id="access-emailed"> — a copy is on its way to your inbox.</span></span>
-                <button onclick="signOutResearch()" class="ml-3 text-primary hover:underline font-bold font-sans text-xs uppercase tracking-wider" style="background:none;border:0;cursor:pointer;padding:0;">Sign out</button>
-            </div>
-
             <!-- ===== LOCKED REST OF THE ARTICLE (revealed after the form / cookie) ===== -->
             <article class="paper-rest" id="paper-rest">
                 <div class="pf-body">
                     <h2>2. Findings at a glance</h2>
                     <p>Five findings from the deployment, each a product of the closed-loop methodology documented in subsequent sections.</p>
-                    <p><strong>1. Engaged-session baskets run substantially larger than the pre-deployment baseline at the same retailer.</strong> Across the measurement window, baskets associated with Coupr-engaged sessions ran approximately forty-one percent larger by item count and fifty-three percent larger by dollar value than the historical baseline of comparable trips at the retailer prior to Coupr's deployment. This is the headline result of the deployment.</p>
+                    <p><strong>1. Engaged-session baskets run substantially larger than the pre-deployment baseline at the same retailer.</strong> Across the measurement window, baskets associated with Coupr-engaged sessions ran approximately thirty-five percent larger by item count and forty-six percent larger by dollar value than the historical baseline of comparable trips at the retailer prior to Coupr's deployment. This is the headline result of the deployment. <em>(Figures reflect the Q2 2026 quarterly update; see the Addendum.)</em></p>
                     <p><strong>2. Engaged sessions are substantively longer than incidental cart use.</strong> The average engaged session — defined as a logged-in trip with three or more substantive interactions with the cart application — runs roughly twenty-eight minutes of in-store screen time. Approximately seventy percent of logged-in cart sessions cross the engagement threshold; the remaining thirty percent are logged-in but lower-interaction. The engagement population is a real shopping cohort, not a casual interaction cohort.</p>
                     <p><strong>3. Brand-level basket attribution at session granularity, measured directly from receipts.</strong> The methodology produces deterministic brand-by-brand basket-appearance rates — the proportion of engaged shopping sessions containing at least one SKU from a given brand. These figures are not panel projections or modeled estimates; each is computed from the direct join of session event traces to register receipts. The capability extends across all brands present in the receipt stream, regardless of national share or branded-panel coverage.</p>
                     <p><strong>4. Regional market dynamics and category-level shopping missions resolve at session granularity.</strong> Because the receipt stream captures every line item regardless of brand size or panel coverage, the methodology surfaces regional brand dynamics and category-level shopping missions that national panel projections cannot resolve. Specialty and regional brands, as well as private-label items, appear in the data with the same fidelity as national brands — a structural advantage over panel methodologies that are anchored to nationally sampled branded categories.</p>
@@ -446,7 +509,7 @@
                     <p>The receipt, when produced, is matched 1:1 to the session via <em>session_id</em>, and the question "did the advertised brand appear in this session's basket" can be answered with deterministic evidence. This is not probabilistic matching, not modeled lift, not exposure-to-outcome inference. It is a direct measurement.</p>
                     <p>A note on the operational scope of this demonstration: the banner program at Coupr is in active expansion. Per-brand banner-to-basket attribution from focused future deployments will be the subject of a follow-up paper. The point of this paper is to establish that the methodology exists and is operational at the infrastructure level.</p>
                     <h3>Demonstration 3: Methodology validation through basket-size comparison</h3>
-                    <p>A side-effect finding offers methodological validation. Across the measurement window, baskets associated with Coupr-engaged sessions ran approximately 41% larger by item count and 53% higher in dollar value than the historical baseline of comparable trips at the same retailer prior to Coupr's deployment.</p>
+                    <p>A side-effect finding offers methodological validation. Across the measurement window, baskets associated with Coupr-engaged sessions ran approximately 35% larger by item count and 46% higher in dollar value than the historical baseline of comparable trips at the same retailer prior to Coupr's deployment. <em>(Q2 2026 quarterly update; see the Addendum.)</em></p>
                     <p>A note on what "comparable" means here. The host retailer provided Coupr with a historical baseline drawn from pre-deployment transactions filtered to trips with comparable item-count profile in order to match the typical Coupr-engaged trip profile. The lift comparison is between the Coupr-engaged cohort during the deployment window and this fixed historical baseline. The baseline is fixed because Coupr does not see non-Coupr transactions during the deployment period — only transactions associated with sessions that linked to the cart system at checkout flow into Coupr's data pipeline.</p>
                     <p>We present this finding as methodological validation rather than as a behavioral lift estimate, and we want to be unambiguous about its limits. The baseline is pre-deployment; the engaged cohort is post-deployment. Macro shifts in the retailer's category mix or basket trends over the same period are attributed to the deployment in this comparison, even when they may have occurred independently. The cohort definitions also differ in selection: the engaged cohort is a self-selected population (shoppers who chose to log in and engage), while the baseline is a population-level snapshot of all trips meeting the item-count filter. A randomized comparison against dedicated non-Coupr stores at the same retail chain will be possible once the deployment expands to multiple retailers in 2026. The directional finding — that Coupr-engaged trips run substantially larger than the pre-deployment baseline — is consistent with an engagement effect of the magnitudes reported. The precision will improve as multi-retailer rollout enables true randomized comparison.</p>
                     <h3>Demonstration 4: Identity-graph extension into the in-aisle layer</h3>
@@ -491,6 +554,12 @@
                     <p><strong>The session-to-receipt join.</strong> The deterministic 1:1 link between a Coupr-engaged session and its register receipt is implemented as an INNER JOIN on <em>session_id</em> between the events warehouse and the POS warehouse. The join match rate is high.</p>
                     <p><strong>Privacy considerations.</strong> Session-level events do not contain PII at the analytical layer. Phone numbers, captured at login when shoppers explicitly identify themselves, are hashed. Receipt-level data is mediated through the retail host's existing privacy infrastructure. The dataset complies with reasonable retail data-handling standards. No data underlying this paper has been or will be published in a form that could re-identify individual shoppers.</p>
                     <p><strong>Data integrity validation.</strong> Event delivery rate from cart device to data warehouse is high. Event schema validation passes at the Lambda layer; failed events are routed to a dead-letter queue for engineering review.</p>
+
+                    <h2>Addendum — July 2026: Q2 data update</h2>
+                    <p>Coupr Research refreshes the deployment figures in this paper on a quarterly cadence as the pilot accumulates data. This addendum reflects the <strong>Q2 2026 update</strong>, which expands the analysis from the original Q4 2025 – Q1 2026 measurement window to the full deployment window — October 2025 through July 2026, covering every engaged session to date. The larger sample makes the estimates more robust and less sensitive to any single period. The update also makes the comparison strictly like-for-like: the pre-deployment baseline has always been restricted to transactions of ten or more line items (the trip-size floor that excludes non-cart trips such as express-lane purchases), and the updated computation applies the same floor to the Coupr-engaged cohort — full shopping trips compared against full shopping trips.</p>
+                    <p>The Q2 update also incorporates an upstream data correction. A data-quality audit of the transaction-item feed identified an ingestion defect that had duplicated a portion of line-item rows — roughly one row in five — inflating items-per-basket and basket dollar values computed from the affected table. The data was corrected in May 2026 and the correction verified at the row level: every removed row was an exact duplicate of a surviving row. Session counts, engagement metrics, brand basket-appearance rates (a brand is counted once per basket), and the session-to-receipt linkage itself were unaffected.</p>
+                    <p>On the updated window, the corrected data, and the like-for-like normalization, baskets associated with Coupr-engaged sessions ran approximately <strong>35% larger by item count</strong> and <strong>46% larger by dollar value</strong> than the same retailer-provided pre-deployment baseline used in the original comparison. The originally published figures (approximately 41% and 53%) reflected the data, window, and comparison design as they stood at publication. The directional finding — engaged trips run substantially larger than the pre-deployment baseline — is unchanged, and the limits stated in Demonstration 3 apply equally to the updated figures.</p>
+                    <p>The next quarterly update will follow the close of Q3 2026. Questions about the updates: <a href="mailto:research@coupr.io" style="color:#E1701A;">research@coupr.io</a>.</p>
                 </div>
 
                 <div class="pf-closing">
@@ -553,6 +622,19 @@
         </div>
     </footer>
 
+    <!-- ============ SUCCESS MODAL ============ -->
+    <div class="paper-modal" id="success-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+        <div class="paper-modal-backdrop" id="modal-backdrop"></div>
+        <div class="paper-modal-card">
+            <div class="paper-modal-icon"><span class="material-symbols-outlined">mark_email_read</span></div>
+            <span class="paper-modal-eyebrow">Check your inbox</span>
+            <h3 id="modal-title">Your paper is on its way.</h3>
+            <p>We're sending the full methodology paper — including the brand-attribution table and banner methodology — to <strong id="modal-email"></strong>. It should arrive in a few minutes; check your spam folder if you don't see it.</p>
+            <button class="paper-modal-btn" id="modal-continue">Start reading <span class="material-symbols-outlined text-base">arrow_forward</span></button>
+            <p class="paper-modal-fine">No newsletter, no spam, no resale of contact details.</p>
+        </div>
+    </div>
+
     <!-- ============ SCRIPTS ============ -->
     <script>
         const CONTACT_ENDPOINT = 'https://vo29nu6c83.execute-api.us-east-1.amazonaws.com/contact';
@@ -603,18 +685,45 @@
         const form = document.getElementById('lead-form');
         const status = document.getElementById('status');
 
-        // Unlock: reveal the rest of the article + swap the form for the access bar.
+        // Unlock: reveal the rest of the article + show the access pill in the header.
         function unlockPaper(email, opts) {
             opts = opts || {};
-            document.getElementById('access-email').textContent = email;
-            document.getElementById('access-emailed').style.display = opts.emailed ? 'inline' : 'none';
+            var ae = document.getElementById('access-email');
+            if (ae) ae.textContent = email || '';
             document.body.classList.add('paper-unlocked');
             if (opts.scroll) {
                 setTimeout(function () {
-                    document.getElementById('paper-rest').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    var pr = document.getElementById('paper-rest');
+                    if (pr) pr.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 120);
             }
         }
+
+        // ---- Success modal (confirmation the PDF copy is on its way) ----
+        function openSuccessModal(email) {
+            var m = document.getElementById('success-modal');
+            document.getElementById('modal-email').textContent = email;
+            m.classList.add('show');
+            m.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSuccessModal(scrollToPaper) {
+            var m = document.getElementById('success-modal');
+            m.classList.remove('show');
+            m.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            if (scrollToPaper) {
+                setTimeout(function () {
+                    var pr = document.getElementById('paper-rest');
+                    if (pr) pr.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 80);
+            }
+        }
+        document.getElementById('modal-continue').addEventListener('click', function () { closeSuccessModal(true); });
+        document.getElementById('modal-backdrop').addEventListener('click', function () { closeSuccessModal(false); });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && document.getElementById('success-modal').classList.contains('show')) closeSuccessModal(false);
+        });
 
         // Returning visitor: if they already submitted (cookie/localStorage), skip
         // the paywall entirely and show the full article.
@@ -624,7 +733,7 @@
                 const unlocked = localStorage.getItem(UNLOCK_FLAG);
                 const saved = localStorage.getItem(STORAGE_KEY) || '';
                 if (unlocked) {
-                    unlockPaper(saved, { emailed: false, scroll: false });
+                    unlockPaper(saved, { scroll: false });
                     if (saved) gaIdentify(saved);
                     gaEvent('paper_unlocked', { paper_id: PAPER_ID, via: 'returning' });
                 } else {
@@ -643,8 +752,34 @@
             } catch (e) {}
         })();
 
+        function emailErrorMsg(check) {
+            return check.reason === 'blocked'
+                ? "Please use your corporate email — " + check.domain + " isn't accepted."
+                : 'Please enter a valid email address.';
+        }
+        function showEmailError(msg) {
+            form.email.classList.add('input-error');
+            document.getElementById('email-error-text').textContent = msg;
+            document.getElementById('email-error').classList.add('show');
+        }
+        function clearEmailError() {
+            form.email.classList.remove('input-error');
+            document.getElementById('email-error').classList.remove('show');
+        }
+
         ['name', 'email', 'company'].forEach(function (n) {
-            if (form[n]) form[n].addEventListener('input', function () { form[n].classList.remove('input-error'); status.textContent = ''; status.className = 'status'; });
+            if (form[n]) form[n].addEventListener('input', function () {
+                form[n].classList.remove('input-error');
+                status.textContent = ''; status.className = 'status';
+                if (n === 'email') document.getElementById('email-error').classList.remove('show');
+            });
+        });
+        // Validate the email as soon as the user leaves the field (on-blur).
+        form.email.addEventListener('blur', function () {
+            const v = form.email.value.trim().toLowerCase();
+            if (!v) { clearEmailError(); return; }
+            const c = isCorporateEmail(v);
+            if (!c.ok) showEmailError(emailErrorMsg(c)); else clearEmailError();
         });
 
         form.addEventListener('submit', function (e) {
@@ -673,21 +808,19 @@
             }
             const check = isCorporateEmail(data.email.toLowerCase());
             if (!check.ok) {
-                form.email.classList.add('input-error');
-                status.className = 'status err';
-                status.textContent = check.reason === 'blocked'
-                    ? "Please use your corporate email (" + check.domain + " isn't accepted)."
-                    : 'Please enter a valid email address.';
+                showEmailError(emailErrorMsg(check));
+                form.email.focus();
                 return;
             }
 
             // Remember (cookie/localStorage) so we never show the paywall again,
-            // reveal the full article inline, and email the PDF copy in the background.
+            // reveal the full article inline, confirm via modal, and email the PDF copy.
             try {
                 localStorage.setItem(STORAGE_KEY, data.email);
                 localStorage.setItem(UNLOCK_FLAG, '1');
             } catch (e) {}
-            unlockPaper(data.email, { emailed: true, scroll: true });
+            unlockPaper(data.email, { scroll: false });
+            openSuccessModal(data.email);
 
             gaIdentify(data.email).then(function () {
                 gaEvent('generate_lead', { paper_id: PAPER_ID, method: 'paywall_form' });
